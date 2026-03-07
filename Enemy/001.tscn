@@ -49,7 +49,7 @@ shape = SubResource("RectangleShape2D_a1ogv")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_h1ymn")
-max_health = 20
+max_health = 3
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["Enamy"]]
@@ -59,4 +59,5 @@ debug_enabled = true
 wait_time = 0.2
 autostart = true
 
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -12,11 +12,13 @@ radius = 62.8013
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
 size = Vector2(128, 128)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Wapons", "Can_attack") groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
+Wapons = NodePath("Wapons")
+Can_attack = NodePath("Can attack")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_l8h54")
@@ -42,5 +44,34 @@ shape = SubResource("RectangleShape2D_k53q1")
 [node name="Health Bar" parent="UI" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
 HP = NodePath("../../Health")
 
+[node name="Wapons" type="Node2D" parent="."]
+
+[node name="W1" type="Marker2D" parent="Wapons"]
+position = Vector2(0, -120)
+
+[node name="W2" type="Marker2D" parent="Wapons"]
+position = Vector2(90, -90)
+
+[node name="W3" type="Marker2D" parent="Wapons"]
+position = Vector2(120, 0)
+
+[node name="W4" type="Marker2D" parent="Wapons"]
+position = Vector2(90, 90)
+
+[node name="W5" type="Marker2D" parent="Wapons"]
+position = Vector2(0, 120)
+
+[node name="W6" type="Marker2D" parent="Wapons"]
+position = Vector2(-90, 90)
+
+[node name="W7" type="Marker2D" parent="Wapons"]
+position = Vector2(-120, 0)
+
+[node name="W8" type="Marker2D" parent="Wapons"]
+position = Vector2(-90, -90)
+
+[node name="Can attack" type="Timer" parent="."]
+
 [connection signal="health_changed" from="Health" to="UI/Health Bar" method="_on_health_health_changed"]
 [connection signal="got_hit" from="HurtBox" to="UI/Health Bar" method="_on_hurt_box_got_hit"]
+[connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]

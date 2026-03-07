@@ -27,18 +27,19 @@ func get_max_health() -> int:
 	return max_health
 
 func set_health(value: int):
-	if value < health and immortality:
-		return
-	
-	var clamped_value = clampi(value, 0, max_health)
-	
-	if clamped_value != health:
-		var diffrence = clamped_value - health
-		health = value
-		health_changed.emit(diffrence)
-	
-	if health == 0:
-		health_depleted.emit()
+	if value != 0:
+		if value < health and immortality:
+			return
+
+		var clamped_value = clampi(value, 0, max_health)
+
+		if clamped_value != health:
+			var diffrence = clamped_value - health
+			health = value
+			health_changed.emit(diffrence)
+
+		if health <= 0:
+			health_depleted.emit()
 
 func get_health() -> int:
 	return health
@@ -62,4 +63,3 @@ func set_temporary_immortality(time: int):
 	immortality_timer.timeout.connect(set_immortality.bind(false))
 	immortality = true
 	immortality_timer.start()
-	

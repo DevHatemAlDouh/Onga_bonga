@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://8hh3mh3k5e4n"]
+
+[ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_nkc8a"]
+[ext_resource type="Script" uid="uid://cuskj8c6slti2" path="res://Projectile/stone.gd" id="1_rdoop"]
+[ext_resource type="Script" uid="uid://o0og1idrbini" path="res://Components/hitbox.gd" id="2_rdoop"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jml8x"]
+size = Vector2(128, 128)
+
+[node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration")]
+script = ExtResource("1_rdoop")
+Speed = 4.5
+Attack_duration = NodePath("Attack")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_nkc8a")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2_rdoop")
+damage = 2
+metadata/_custom_type_script = "uid://o0og1idrbini"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_jml8x")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="Attack" type="Timer" parent="."]
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["Player"]]
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="timeout" from="Attack" to="." method="_on_attack_timeout"]

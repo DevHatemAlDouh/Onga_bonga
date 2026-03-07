@@ -99,12 +99,20 @@ tile_set = SubResource("TileSet_7l666")
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("1_n5y48")]
+position = Vector2(424, 121)
 
 [node name="Camera2D" type="Camera2D" parent="Players/Player"]
 
 [node name="Icon" type="Sprite2D" parent="Players"]
-position = Vector2(251, 507)
 texture = ExtResource("3_7l666")
 
-[node name="001" parent="." instance=ExtResource("2_yc365")]
+[node name="Enemys" type="Node2D" parent="."]
+
+[node name="001" parent="Enemys" instance=ExtResource("2_yc365")]
 position = Vector2(95, -713)
+
+[node name="002" parent="Enemys" instance=ExtResource("2_yc365")]
+position = Vector2(678, -552)
+
+[node name="003" parent="Enemys" instance=ExtResource("2_yc365")]
+position = Vector2(-209, -694)
