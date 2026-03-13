@@ -30,7 +30,7 @@ shape = SubResource("RectangleShape2D_jml8x")
 [node name="Attack" type="Timer" parent="."]
 one_shot = true
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["Player"]]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

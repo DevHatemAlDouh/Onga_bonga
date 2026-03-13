@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var Stone = preload("res://Projectile/stone.tscn")
+@onready var Stone = preload("uid://8hh3mh3k5e4n")
 
 const SPEED = 500.0
 var dir : Vector2
@@ -27,7 +27,7 @@ func makepath():
 			shotrest_distance = distance_formula(global_position,Enames[i].global_position)
 	return Nerast_enamy
 
-func Wapon():
+func wapon():
 	var Wapon = Wapons.get_children()
 	var stone_tamp = Stone.instantiate()
 	add_child(stone_tamp)
@@ -39,7 +39,7 @@ func Wapon():
 
 func _physics_process(_delta: float) -> void:
 	if makepath() != Vector2.ZERO && can_attack:
-		Can_attack.start(Wapon())
+		Can_attack.start(wapon())
 		can_attack = false
 	velocity = dir * SPEED
 	move_and_slide()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene load_steps=10 format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://dt2xrxrn812gc" path="res://Components/hurtbox.gd" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://dxewwf8xymrh2" path="res://Components/UI/Health_bar.tscn" id="3_fhl08"]
 [ext_resource type="Script" uid="uid://tscn7y28rhmh" path="res://Components/health.gd" id="3_gwnis"]
+[ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/xp_detactor.gd" id="6_fhl08"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 62.8013
@@ -12,9 +13,12 @@ radius = 62.8013
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
 size = Vector2(128, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
+size = Vector2(128, 128)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Wapons", "Can_attack") groups=["Player"]]
-collision_layer = 2
-collision_mask = 13
+collision_layer = 3
+collision_mask = 44
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
 Wapons = NodePath("Wapons")
@@ -39,6 +43,13 @@ metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_k53q1")
 
+[node name="XP_detactor" type="Area2D" parent="."]
+script = ExtResource("6_fhl08")
+metadata/_custom_type_script = "uid://c5ljetnoa405n"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XP_detactor"]
+shape = SubResource("RectangleShape2D_vtle1")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Health Bar" parent="UI" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
@@ -47,7 +58,6 @@ HP = NodePath("../../Health")
 [node name="Wapons" type="Node2D" parent="."]
 
 [node name="W1" type="Marker2D" parent="Wapons"]
-position = Vector2(0, -120)
 
 [node name="W2" type="Marker2D" parent="Wapons"]
 position = Vector2(90, -90)

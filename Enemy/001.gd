@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 const Speed = 200
+@onready var Xp = preload("uid://dh4wshijexd47")
+
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
 func _physics_process(_delta: float) -> void:
@@ -26,5 +28,13 @@ func _on_timer_timeout() -> void:
 	makepath()
 
 
+func xp():
+	var Xp_orb = Xp.instantiate()
+	Xp_orb.set_deferred("global_position",global_position)
+	await get_tree().process_frame
+	return Xp_orb
+	
+
 func _on_health_health_depleted() -> void:
+	get_parent().get_parent().get_node("XP").add_child(await xp())
 	queue_free()

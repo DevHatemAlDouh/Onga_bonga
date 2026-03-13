@@ -14,6 +14,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is HitBox:
 		var hitbox: HitBox = area
 		if hitbox != null:
-			got_hit.emit()
-			health.health -= hitbox.damage
-			received_damage.emit(hitbox.damage)
+			if get_parent().get_parent().name != hitbox.get_parent().get_parent().get_parent().name:
+				got_hit.emit()
+				health.health -= hitbox.damage
+				received_damage.emit(hitbox.damage)

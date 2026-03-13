@@ -61,7 +61,7 @@ Attack={
 
 2d_physics/layer_1="Wall"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Enamy"
+2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Boss"
 
 [rendering]
