@@ -7,8 +7,8 @@ extends Node2D
 @export var Enemy_list : Node2D
 
 func Spawner():
-	for i in Enamy_number:
-		var RNG = RandomNumberGenerator.new()
+	var RNG = RandomNumberGenerator.new()
+	for i in RNG.randf_range(1,Enamy_number):
 		var pos : Vector2
 		pos.x = RNG.randf_range(-1000,1000)
 		pos.y = RNG.randf_range(-1000,1000)

@@ -7,11 +7,13 @@ var dir : Vector2
 @export var Wapons: Node2D
 @export var Can_attack: Timer
 var can_attack = true
+var Daed = false
 
 func _unhandled_input(_event: InputEvent) -> void:
-	dir.x = Input.get_axis("Left", "Right")
-	dir.y = Input.get_axis("Top", "Down")
-	dir = dir.normalized()
+	if !Daed:
+		dir.x = Input.get_axis("Left", "Right")
+		dir.y = Input.get_axis("Top", "Down")
+		dir = dir.normalized()
 
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
@@ -38,11 +40,12 @@ func wapon():
 	return stone_tamp.get_attack_speed()
 
 func _physics_process(_delta: float) -> void:
-	if makepath() != Vector2.ZERO && can_attack:
-		Can_attack.start(wapon())
-		can_attack = false
-	velocity = dir * SPEED
-	move_and_slide()
+	if !Daed:
+		if makepath() != Vector2.ZERO && can_attack:
+			Can_attack.start(wapon())
+			can_attack = false
+		velocity = dir * SPEED
+		move_and_slide()
 
 
 func _on_can_attack_timeout() -> void:

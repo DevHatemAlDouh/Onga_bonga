@@ -30,6 +30,7 @@ func _on_timer_timeout() -> void:
 
 func xp():
 	var Xp_orb = Xp.instantiate()
+	Xp_orb.set_xp(3)
 	Xp_orb.set_deferred("global_position",global_position)
 	await get_tree().process_frame
 	return Xp_orb

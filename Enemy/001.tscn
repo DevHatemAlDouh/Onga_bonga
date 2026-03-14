@@ -24,9 +24,11 @@ script = ExtResource("1_a1ogv")
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_0arr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_0arr3")
 debug_color = Color(1, 1, 1, 0.42)
 
@@ -36,6 +38,7 @@ damage = 3
 metadata/_custom_type_script = "uid://o0og1idrbini"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+scale = Vector2(0.7, 0.7)
 shape = SubResource("RectangleShape2D_0arr3")
 debug_color = Color(0.555773, 0, 0.147799, 0.42)
 
@@ -45,6 +48,7 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+scale = Vector2(0.7, 0.7)
 shape = SubResource("RectangleShape2D_a1ogv")
 
 [node name="Health" type="Node" parent="."]

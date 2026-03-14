@@ -4,8 +4,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7en5g"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3cnr"]
-bg_color = Color(0.827451, 0.207843, 0.254902, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gun6b"]
+bg_color = Color(1, 0.345098, 0.427451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inrhq"]
 bg_color = Color(0, 0, 0, 0.588235)
@@ -24,7 +24,7 @@ z_index = 1
 offset_right = 240.0
 offset_bottom = 4.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_7en5g")
-theme_override_styles/fill = SubResource("StyleBoxFlat_w3cnr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gun6b")
 value = 20.0
 show_percentage = false
 script = ExtResource("1_gun6b")

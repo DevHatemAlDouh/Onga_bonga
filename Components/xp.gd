@@ -1,28 +1,31 @@
 class_name XP
-extends Area2D
+extends Node
 
-var Xp: float
-
-func set_xp(value:float):
-	Xp = value
+signal max_xp_changed(diff: float)
+signal xp_changed(diff: float)
 
 
+@export var max_xp: float :set = set_max_xp, get =get_max_xp
 
-func distance_formula(me:Vector2,target:Vector2):
-	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
-	return distance
+@onready var xp:float = 0 :set = set_xp, get = get_xp
 
-func makepath():
-	var Players = get_parent().get_parent().find_child("Players").get_children()
-	var Nerast_player : Vector2
-	var shotrest_distance = 100000
-	for i in Players.size():
-		if shotrest_distance >= distance_formula(global_position,Players[i].global_position):
-			Nerast_player = Players[i].global_position
-			shotrest_distance = distance_formula(global_position,Players[i].global_position)
-	return Nerast_player
+func set_max_xp(value: float):
+	max_xp = value
+	max_xp_changed.emit(max_xp)
 
+func get_max_xp() -> float:
+	return max_xp
 
+func set_xp(value: float):
+	if value != 0:
+		xp += value
+		if xp >= get_max_xp():
+			xp -= get_max_xp()
+			Livel_up()
+		xp_changed.emit(xp)
 
 func get_xp() -> float:
-	return Xp
+	return xp
+
+func  Livel_up():
+	set_max_xp(get_max_xp()+(get_max_xp()/10))
