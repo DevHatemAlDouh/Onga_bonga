@@ -5,10 +5,19 @@ const Speed = 200
 
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
+@export var animation: AnimationPlayer
+
 func _physics_process(_delta: float) -> void:
+	if !animation.is_playing():
+		animation.play("Move")
 	var dir = to_local(nav_agent.get_next_path_position()).normalized()
+	var GP_b = global_position.x
 	velocity = dir * Speed
 	move_and_slide()
+	if GP_b > global_position.x:
+		$AnimatedSprite2D.flip_h = true
+	else :
+		$AnimatedSprite2D.flip_h = false
 
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
@@ -39,3 +48,13 @@ func xp():
 func _on_health_health_depleted() -> void:
 	get_parent().get_parent().get_node("XP").add_child(await xp())
 	queue_free()
+
+
+func _on_hurt_box_got_hit() -> void:
+	$AnimatedSprite2D.modulate = "#808080"
+	$"Got hit".start()
+	
+
+
+func _on_got_hit_timeout() -> void:
+	$AnimatedSprite2D.modulate = "#ffffff"

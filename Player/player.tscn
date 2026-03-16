@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene load_steps=13 format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bhf6gsmednrk7" path="res://Components/xp.gd" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/xp_detactor.gd" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/xp_bar.tscn" id="8_od3ui"]
+[ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 62.8013
@@ -18,13 +19,15 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
 size = Vector2(128, 128)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Wapons", "Can_attack") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Wapons", "Can_attack", "Death_screen", "Can_level_up") groups=["Player"]]
 collision_layer = 3
-collision_mask = 44
+collision_mask = 45
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
 Wapons = NodePath("Wapons")
 Can_attack = NodePath("Can attack")
+Death_screen = NodePath("UI/Death screen")
+Can_level_up = NodePath("UI/Control/LevelUp")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_l8h54")
@@ -62,10 +65,54 @@ shape = SubResource("RectangleShape2D_vtle1")
 [node name="Health Bar" parent="UI" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
 HP = NodePath("../../Health")
 
-[node name="XP_bar" parent="UI" node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="XP_bar" parent="UI/Control" node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
+layout_mode = 0
 offset_top = 7.0
 offset_bottom = 11.0
-Xp = NodePath("../../XP")
+Xp = NodePath("../../../XP")
+
+[node name="LevelUp" type="Sprite2D" parent="UI/Control"]
+visible = false
+position = Vector2(244, 9)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_00tjw")
+
+[node name="Death screen" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Death screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.23, 0.23, 0.23, 0.588235)
+
+[node name="Label" type="Label" parent="UI/Death screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -11.5
+offset_right = 42.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game over"
 
 [node name="Wapons" type="Node2D" parent="."]
 
@@ -95,8 +142,10 @@ position = Vector2(-90, -90)
 [node name="Can attack" type="Timer" parent="."]
 
 [connection signal="health_changed" from="Health" to="UI/Health Bar" method="_on_health_health_changed"]
-[connection signal="max_xp_changed" from="XP" to="UI/XP_bar" method="_on_xp_max_xp_changed"]
-[connection signal="xp_changed" from="XP" to="UI/XP_bar" method="_on_xp_xp_changed"]
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[connection signal="level_up" from="XP" to="." method="_on_xp_level_up"]
+[connection signal="max_xp_changed" from="XP" to="UI/Control/XP_bar" method="_on_xp_max_xp_changed"]
+[connection signal="xp_changed" from="XP" to="UI/Control/XP_bar" method="_on_xp_xp_changed"]
 [connection signal="got_hit" from="HurtBox" to="UI/Health Bar" method="_on_hurt_box_got_hit"]
-[connection signal="received_XP" from="XP_detactor" to="UI/XP_bar" method="_on_xp_detactor_received_xp"]
+[connection signal="received_XP" from="XP_detactor" to="UI/Control/XP_bar" method="_on_xp_detactor_received_xp"]
 [connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]

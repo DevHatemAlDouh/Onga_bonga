@@ -9,7 +9,7 @@ size = Vector2(128, 128)
 
 [node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration")]
 script = ExtResource("1_rdoop")
-Speed = 4.5
+Speed = 5.0
 Attack_duration = NodePath("Attack")
 
 [node name="Icon" type="Sprite2D" parent="."]
@@ -29,8 +29,6 @@ shape = SubResource("RectangleShape2D_jml8x")
 
 [node name="Attack" type="Timer" parent="."]
 one_shot = true
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

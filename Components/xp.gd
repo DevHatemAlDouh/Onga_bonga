@@ -3,6 +3,7 @@ extends Node
 
 signal max_xp_changed(diff: float)
 signal xp_changed(diff: float)
+signal level_up
 
 
 @export var max_xp: float :set = set_max_xp, get =get_max_xp
@@ -27,5 +28,6 @@ func set_xp(value: float):
 func get_xp() -> float:
 	return xp
 
-func  Livel_up():
+func Livel_up():
+	level_up.emit()
 	set_max_xp(get_max_xp()+(get_max_xp()/10))

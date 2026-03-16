@@ -6,7 +6,6 @@ var prev_xp: int
 
 func _set_xp():
 	value = prev_xp
-	print(max_value,value)
 
 
 func _ready() -> void:
@@ -24,5 +23,5 @@ func _on_xp_xp_changed(diff: int) -> void:
 	_set_xp()
 
 
-func _on_xp_detactor_received_xp(XP_Orn: float) -> void:
-	Xp.set_xp(XP_Orn)
+func _on_xp_detactor_received_xp(XP_orn: float) -> void:
+	Xp.set_xp(XP_orn)

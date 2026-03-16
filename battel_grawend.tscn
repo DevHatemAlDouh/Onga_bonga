@@ -87,10 +87,11 @@ terrain_set_0/terrain_1/color = Color(0, 0, 0, 1)
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_yc365")
 
-[node name="Battel grawend" type="Node2D" node_paths=PackedStringArray("Enemy_list")]
+[node name="Battel grawend" type="Node2D" node_paths=PackedStringArray("Enemy_list", "Enemy_spawner_list")]
 script = ExtResource("1_7l666")
-Enamy_number = 5
+Enamy_number = 20
 Enemy_list = NodePath("Enemys")
+Enemy_spawner_list = NodePath("Enamy_pos")
 
 [node name="BG" type="Node2D" parent="."]
 
@@ -105,6 +106,13 @@ tile_set = SubResource("TileSet_7l666")
 [node name="Player" parent="Players" instance=ExtResource("1_n5y48")]
 
 [node name="Camera2D" type="Camera2D" parent="Players/Player"]
-zoom = Vector2(0.45, 0.45)
+zoom = Vector2(0.2, 0.2)
 
 [node name="Enemys" type="Node2D" parent="."]
+
+[node name="Spawner timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Enamy_pos" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Spawner timer" to="." method="_on_spawner_timer_timeout"]

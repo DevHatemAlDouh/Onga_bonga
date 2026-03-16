@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbr4er6rl5qob"]
+
+[ext_resource type="Texture2D" uid="uid://elcrtj5363ok" path="res://Enemy/Enemy-sopawn-point-back.png" id="1_doxay"]
+
+[node name="Enemy-sopawn-point-back" type="Sprite2D"]
+texture = ExtResource("1_doxay")

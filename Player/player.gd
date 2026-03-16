@@ -6,11 +6,15 @@ const SPEED = 500.0
 var dir : Vector2
 @export var Wapons: Node2D
 @export var Can_attack: Timer
+@export var Death_screen : Control
+@export var Can_level_up : Sprite2D
 var can_attack = true
-var Daed = false
+var Death = false
+
+
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if !Daed:
+	if !Death:
 		dir.x = Input.get_axis("Left", "Right")
 		dir.y = Input.get_axis("Top", "Down")
 		dir = dir.normalized()
@@ -40,13 +44,20 @@ func wapon():
 	return stone_tamp.get_attack_speed()
 
 func _physics_process(_delta: float) -> void:
-	if !Daed:
+	Death_screen.visible = Death
+	if !Death:
 		if makepath() != Vector2.ZERO && can_attack:
 			Can_attack.start(wapon())
 			can_attack = false
 		velocity = dir * SPEED
 		move_and_slide()
 
-
 func _on_can_attack_timeout() -> void:
 	can_attack = true
+
+func _on_health_health_depleted() -> void:
+	Death = true 
+	Engine.time_scale = 0
+
+func _on_xp_level_up() -> void:
+	Can_level_up.visible = true
