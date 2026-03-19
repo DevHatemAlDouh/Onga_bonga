@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene load_steps=15 format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/xp_detactor.gd" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/xp_bar.tscn" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
+[ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
+[ext_resource type="PackedScene" uid="uid://bjbxfyct4io7g" path="res://Components/UI/retry.tscn" id="11_apopc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 62.8013
@@ -84,11 +86,11 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("9_00tjw")
 
 [node name="Death screen" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 270.0
+size_flags_horizontal = 4
 
 [node name="ColorRect" type="ColorRect" parent="UI/Death screen"]
 layout_mode = 1
@@ -99,20 +101,30 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.23, 0.23, 0.23, 0.588235)
 
-[node name="Label" type="Label" parent="UI/Death screen"]
+[node name="BoxContainer" type="BoxContainer" parent="UI/Death screen"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.5
-offset_top = -11.5
-offset_right = 42.5
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Game over"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Death screen/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Game over" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="GameOver" type="Sprite2D" parent="UI/Death screen/BoxContainer/VBoxContainer/Game over"]
+texture = ExtResource("10_x3vf3")
+
+[node name="Retry" parent="UI/Death screen/BoxContainer/VBoxContainer" instance=ExtResource("11_apopc")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 
 [node name="Wapons" type="Node2D" parent="."]
 

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjbxfyct4io7g"]
+
+[ext_resource type="Script" uid="uid://drewluginm8wg" path="res://Components/UI/retry.gd" id="1_wlvkv"]
+[ext_resource type="Texture2D" uid="uid://bqe0oqh4n4l15" path="res://Components/UI/Retry.png" id="2_8y318"]
+
+[node name="Retry" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wlvkv")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+icon = ExtResource("2_8y318")
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
