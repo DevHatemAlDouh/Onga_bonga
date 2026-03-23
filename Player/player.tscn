@@ -1,13 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene load_steps=16 format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
-[ext_resource type="Script" uid="uid://dt2xrxrn812gc" path="res://Components/hurtbox.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://dt2xrxrn812gc" path="res://Components/Scripts/hurtbox.gd" id="2_4ntmi"]
 [ext_resource type="PackedScene" uid="uid://dxewwf8xymrh2" path="res://Components/UI/Health_bar.tscn" id="3_fhl08"]
-[ext_resource type="Script" uid="uid://tscn7y28rhmh" path="res://Components/health.gd" id="3_gwnis"]
-[ext_resource type="Script" uid="uid://bhf6gsmednrk7" path="res://Components/xp.gd" id="4_vtle1"]
-[ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/xp_detactor.gd" id="6_fhl08"]
-[ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/xp_bar.tscn" id="8_od3ui"]
+[ext_resource type="Script" uid="uid://tscn7y28rhmh" path="res://Components/Scripts/health.gd" id="3_gwnis"]
+[ext_resource type="Script" uid="uid://bhf6gsmednrk7" path="res://Components/Scripts/xp.gd" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/Scripts/xp_detactor.gd" id="6_fhl08"]
+[ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/Scenes/xp_bar.tscn" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
 [ext_resource type="PackedScene" uid="uid://bjbxfyct4io7g" path="res://Components/UI/retry.tscn" id="11_apopc"]
@@ -21,15 +21,20 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
 size = Vector2(128, 128)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Wapons", "Can_attack", "Death_screen", "Can_level_up") groups=["Player"]]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_apopc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up") groups=["Player"]]
 collision_layer = 3
 collision_mask = 45
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
-Wapons = NodePath("Wapons")
 Can_attack = NodePath("Can attack")
 Death_screen = NodePath("UI/Death screen")
-Can_level_up = NodePath("UI/Control/LevelUp")
+Player_UI = NodePath("UI/Player UI")
+Can_level_up = NodePath("UI/Player UI/BoxContainer/Control/LevelUp2")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("1_l8h54")
@@ -62,30 +67,51 @@ metadata/_custom_type_script = "uid://c5ljetnoa405n"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="XP_detactor"]
 shape = SubResource("RectangleShape2D_vtle1")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(0.2, 0.2)
+
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
-[node name="Health Bar" parent="UI" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
-HP = NodePath("../../Health")
-
-[node name="Control" type="Control" parent="UI"]
+[node name="Player UI" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="XP_bar" parent="UI/Control" node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
+[node name="BoxContainer" type="BoxContainer" parent="UI/Player UI"]
 layout_mode = 0
-offset_top = 7.0
-offset_bottom = 11.0
-Xp = NodePath("../../../XP")
+offset_right = 249.0
+offset_bottom = 14.0
 
-[node name="LevelUp" type="Sprite2D" parent="UI/Control"]
+[node name="Control" type="HBoxContainer" parent="UI/Player UI/BoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Player UI/BoxContainer/Control"]
+layout_mode = 2
+
+[node name="Health Bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
+custom_minimum_size = Vector2(240, 5)
+layout_mode = 2
+HP = NodePath("../../../../../../Health")
+
+[node name="XP_bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
+custom_minimum_size = Vector2(240, 5)
+layout_mode = 2
+size_flags_vertical = 1
+Xp = NodePath("../../../../../../XP")
+
+[node name="LevelUp2" type="TextureRect" parent="UI/Player UI/BoxContainer/Control"]
 visible = false
-position = Vector2(244, 9)
-scale = Vector2(0.15, 0.15)
+layout_mode = 2
 texture = ExtResource("9_00tjw")
+expand_mode = 2
 
 [node name="Death screen" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 480.0
@@ -118,7 +144,12 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="GameOver" type="Sprite2D" parent="UI/Death screen/BoxContainer/VBoxContainer/Game over"]
+[node name="TextureRect" type="TextureRect" parent="UI/Death screen/BoxContainer/VBoxContainer/Game over"]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 texture = ExtResource("10_x3vf3")
 
 [node name="Retry" parent="UI/Death screen/BoxContainer/VBoxContainer" instance=ExtResource("11_apopc")]
@@ -127,6 +158,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 
 [node name="Wapons" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="W1" type="Marker2D" parent="Wapons"]
 
@@ -153,11 +185,14 @@ position = Vector2(-90, -90)
 
 [node name="Can attack" type="Timer" parent="."]
 
-[connection signal="health_changed" from="Health" to="UI/Health Bar" method="_on_health_health_changed"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_apopc")
+
+[connection signal="health_changed" from="Health" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_health_health_changed"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="level_up" from="XP" to="." method="_on_xp_level_up"]
-[connection signal="max_xp_changed" from="XP" to="UI/Control/XP_bar" method="_on_xp_max_xp_changed"]
-[connection signal="xp_changed" from="XP" to="UI/Control/XP_bar" method="_on_xp_xp_changed"]
-[connection signal="got_hit" from="HurtBox" to="UI/Health Bar" method="_on_hurt_box_got_hit"]
-[connection signal="received_XP" from="XP_detactor" to="UI/Control/XP_bar" method="_on_xp_detactor_received_xp"]
+[connection signal="max_xp_changed" from="XP" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_max_xp_changed"]
+[connection signal="xp_changed" from="XP" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_xp_changed"]
+[connection signal="got_hit" from="HurtBox" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_hurt_box_got_hit"]
+[connection signal="received_XP" from="XP_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_detactor_received_xp"]
 [connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]

@@ -2,10 +2,6 @@ extends ProgressBar
 
 @export var Xp :Node
 
-var prev_xp: int
-
-func _set_xp():
-	value = prev_xp
 
 
 func _ready() -> void:
@@ -19,8 +15,8 @@ func _on_xp_max_xp_changed(diff: int) -> void:
 
 
 func _on_xp_xp_changed(diff: int) -> void:
-	prev_xp = diff
-	_set_xp()
+	value = diff
+
 
 
 func _on_xp_detactor_received_xp(XP_orn: float) -> void:

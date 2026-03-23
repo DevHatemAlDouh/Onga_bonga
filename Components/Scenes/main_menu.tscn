@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://h1dsapjhjpob"]
+
+[ext_resource type="Script" uid="uid://cae5d8tmjsem1" path="res://Components/Scripts/main_menu.gd" id="1_lya5o"]
+[ext_resource type="Texture2D" uid="uid://d2v02lli4im2n" path="res://Components/UI/Play.png" id="2_8ujs1"]
+[ext_resource type="Texture2D" uid="uid://bm5lh2ptxvxss" path="res://Components/UI/Quit.png" id="2_lya5o"]
+[ext_resource type="Texture2D" uid="uid://un2c6ufm7u8i" path="res://Components/UI/singl player.png" id="4_5mfhq"]
+[ext_resource type="Texture2D" uid="uid://bysxwcv2cdrmf" path="res://Components/UI/multi player.png" id="5_g1y7o"]
+
+[node name="Main menu" type="CanvasLayer"]
+script = ExtResource("1_lya5o")
+
+[node name="Start" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Start/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Start/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_8ujs1")
+flat = true
+
+[node name="Quit" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+icon = ExtResource("2_lya5o")
+flat = true
+
+[node name="Servet type" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Servet type"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Servet type/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Servet type/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Singlplayer" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("4_5mfhq")
+flat = true
+
+[node name="Multiplayer" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("5_g1y7o")
+flat = true
+
+[node name="Back" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+icon = ExtResource("2_lya5o")
+flat = true

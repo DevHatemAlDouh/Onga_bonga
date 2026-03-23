@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://8hh3mh3k5e4n"]
+
+[ext_resource type="Script" uid="uid://cuskj8c6slti2" path="res://Projectile/Scripts/stone.gd" id="1_rdoop"]
+[ext_resource type="Texture2D" uid="uid://bpsmtd0wqbsfh" path="res://Projectile/UI/Stone.png" id="2_jml8x"]
+[ext_resource type="Script" uid="uid://o0og1idrbini" path="res://Components/Scripts/hitbox.gd" id="2_rdoop"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k80n2"]
+radius = 50.9902
+
+[sub_resource type="Animation" id="Animation_rw3bj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gu4rw"]
+resource_name = "Roling"
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stone:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 2,
+"values": [0.0, 3.14159, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mvj2"]
+_data = {
+&"RESET": SubResource("Animation_rw3bj"),
+&"Roling": SubResource("Animation_gu4rw")
+}
+
+[node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration", "animation")]
+script = ExtResource("1_rdoop")
+Speed = 5.0
+Attack_duration = NodePath("Attack")
+animation = NodePath("AnimationPlayer")
+
+[node name="Stone" type="Sprite2D" parent="."]
+texture = ExtResource("2_jml8x")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("2_rdoop")
+damage = 2
+metadata/_custom_type_script = "uid://o0og1idrbini"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_k80n2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="Attack" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8mvj2")
+}
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="timeout" from="Attack" to="." method="_on_attack_timeout"]

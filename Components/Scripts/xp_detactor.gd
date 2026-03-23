@@ -13,4 +13,4 @@ func _on_area_entered(area: Area2D) -> void:
 		var Xp: XP_Orn = area
 		if Xp != null:
 			received_XP.emit(Xp.get_xp())
-			Xp.queue_free()
+			Xp.depleted()

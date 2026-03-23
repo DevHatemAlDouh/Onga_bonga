@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh4wshijexd47"]
+
+[ext_resource type="Script" uid="uid://ce8perc7xouce" path="res://Components/Scripts/XP_Orb.gd" id="1_nayqo"]
+[ext_resource type="Texture2D" uid="uid://bhrre0l2f4x0b" path="res://Components/UI/Xp_orb.png" id="2_nayqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21itc"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nayqo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="XP_Orb" type="Area2D"]
+script = ExtResource("1_nayqo")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.768627, 1)
+texture = ExtResource("2_nayqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.785398
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_21itc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nayqo")

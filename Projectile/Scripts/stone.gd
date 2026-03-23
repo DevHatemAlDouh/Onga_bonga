@@ -3,10 +3,14 @@ extends Node2D
 var Can_attack := true
 @export var Speed : float
 @export var Attack_duration : Timer
+@export var animation : AnimationPlayer
 var Enemy:Vector2
+
 
 func _process(delta: float) -> void:
 	if !Can_attack:
+		if !animation.is_playing():
+			animation.play("Roling")
 		position += Speed * to_local(Enemy) * delta
 
 func Attack(target:Vector2):
