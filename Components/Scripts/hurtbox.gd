@@ -1,7 +1,7 @@
 class_name HurtBox
 extends Area2D
 
-signal received_damage(damage: int)
+
 signal got_hit
 
 
@@ -17,4 +17,3 @@ func _on_area_entered(area: Area2D) -> void:
 			if get_parent().get_parent().name != hitbox.get_parent().get_parent().get_parent().name:
 				got_hit.emit()
 				health.health -= hitbox.damage
-				received_damage.emit(hitbox.damage)

@@ -42,6 +42,7 @@ texture = ExtResource("1_l8h54")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_gwnis")
 max_health = 10
+immortality = true
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
 [node name="XP" type="Node" parent="."]

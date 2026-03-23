@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 const Speed = 200
-@onready var Xp = preload("uid://dh4wshijexd47")
 
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 
@@ -35,33 +34,20 @@ func makepath():
 			Nerast_player = players[i].global_position
 			shotrest_distance = distance_formula(global_position,players[i].global_position)
 	nav_agent.target_position = Nerast_player
-	
+
 
 func _on_timer_timeout() -> void:
 	makepath()
 
-
-func xp():
-	var Xp_orb = Xp.instantiate()
-	Xp_orb.set_xp(3)
-	Xp_orb.set_deferred("global_position",global_position)
-	await get_tree().process_frame
-	return Xp_orb
-	
-
 func _on_health_health_depleted() -> void:
 	if is_multiplayer_authority():
 		Not_live.emit()
-		get_parent().get_parent().get_node("XP").add_child(await xp(),true)
 		queue_free()
-
 
 func _on_hurt_box_got_hit() -> void:
 	if is_multiplayer_authority():
 		$AnimatedSprite2D.modulate = "#808080"
 		$"Got hit".start()
-	
-
 
 func _on_got_hit_timeout() -> void:
 	if is_multiplayer_authority():

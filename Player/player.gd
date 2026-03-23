@@ -19,8 +19,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if is_multiplayer_authority():
 		camera_2d.make_current()
-	#else:
-		#ui.hide()
+	else:
+		ui.hide()
 
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)

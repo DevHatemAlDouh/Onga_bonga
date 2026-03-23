@@ -5,6 +5,9 @@ signal free_me
 
 var Xp: float
 
+func _ready() -> void:
+	Xp = randf_range(1,5)
+
 func set_xp(value:float):
 	Xp = value
 
@@ -13,12 +16,13 @@ func get_xp() -> float:
 
 func depleted():
 	free_me.emit()
+
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
 	return distance
 
 func makepath():
-	var Players = get_parent().get_parent().find_child("Players").get_children()
+	var Players = get_tree().get_nodes_in_group("Player")
 	var Nerast_player : Vector2
 	var shotrest_distance = 100000
 	for i in Players.size():
