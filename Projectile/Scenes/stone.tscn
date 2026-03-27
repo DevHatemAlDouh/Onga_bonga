@@ -44,7 +44,7 @@ _data = {
 &"Roling": SubResource("Animation_gu4rw")
 }
 
-[node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration", "animation")]
+[node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration", "animation") groups=["Player_projectiles"]]
 script = ExtResource("1_rdoop")
 Speed = 5.0
 Attack_duration = NodePath("Attack")

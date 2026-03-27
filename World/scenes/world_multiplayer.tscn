@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://dsqeghera187s"]
+[gd_scene load_steps=11 format=4 uid="uid://dsqeghera187s"]
 
-[ext_resource type="Script" uid="uid://n6ujmir00hn2" path="res://World/scenes/enamy_spawn_point_spawner.gd" id="2_0p3x1"]
-[ext_resource type="Script" uid="uid://wbeo7oap8otm" path="res://World/script/enemy_spawner.gd" id="2_lsw76"]
-[ext_resource type="Texture2D" uid="uid://ccrgvi48na84l" path="res://BG/Asset/Grawend.png" id="2_tnglp"]
-[ext_resource type="Script" uid="uid://vjyc8y0xaegh" path="res://World/script/xp_spawner.gd" id="3_lsw76"]
+[ext_resource type="Texture2D" uid="uid://ccrgvi48na84l" path="res://BG/Asset/Grawend.png" id="1_1yhi2"]
+[ext_resource type="Script" uid="uid://n6ujmir00hn2" path="res://World/Scripts/enamy_spawn_point_spawner.gd" id="2_av52r"]
+[ext_resource type="Script" uid="uid://wbeo7oap8otm" path="res://World/Scripts/enemy_spawner.gd" id="3_xwrb3"]
+[ext_resource type="Script" uid="uid://vjyc8y0xaegh" path="res://World/Scripts/xp_spawner.gd" id="4_5i0cy"]
+[ext_resource type="Script" uid="uid://cvuwjrb8er1sn" path="res://World/Scripts/heling_items.gd" id="5_av52r"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yc365"]
 vertices = PackedVector2Array(24, 24, -24, 24, -24, -24, 24, -24)
@@ -24,7 +25,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, 24, -24, 24, 
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tuwla"]
-texture = ExtResource("2_tnglp")
+texture = ExtResource("1_1yhi2")
 texture_region_size = Vector2i(48, 48)
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -98,6 +99,8 @@ tile_set = SubResource("TileSet_7l666")
 
 [node name="XP" type="Node2D" parent="."]
 
+[node name="Heling items" type="Node2D" parent="."]
+
 [node name="Enemys" type="Node2D" parent="."]
 unique_name_in_owner = true
 
@@ -118,18 +121,24 @@ zoom = Vector2(0.1, 0.1)
 [node name="Enamy_spawn_point_spawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("uid://cbr4er6rl5qob")
 spawn_path = NodePath("../../Enamy_pos")
-script = ExtResource("2_0p3x1")
+script = ExtResource("2_av52r")
 Enamy_number = 20
 
 [node name="Enemy_spawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("uid://is57xa3if7hx")
 spawn_path = NodePath("../../Enemys")
-script = ExtResource("2_lsw76")
+script = ExtResource("3_xwrb3")
 
 [node name="XP_spawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("uid://dh4wshijexd47")
 spawn_path = NodePath("../../XP")
-script = ExtResource("3_lsw76")
+script = ExtResource("4_5i0cy")
+
+[node name="Heling_items" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("uid://n5hp6gvreery")
+spawn_path = NodePath("../../Heling items")
+script = ExtResource("5_av52r")
 
 [connection signal="timeout" from="Spawner timer" to="Spawners/Enemy_spawner" method="_on_spawner_timer_timeout"]
 [connection signal="enemy_is_ready" from="Spawners/Enemy_spawner" to="Spawners/XP_spawner" method="_on_enemy_spawner_enemy_is_ready"]
+[connection signal="enemy_is_ready" from="Spawners/Enemy_spawner" to="Spawners/Heling_items" method="_on_enemy_spawner_enemy_is_ready"]

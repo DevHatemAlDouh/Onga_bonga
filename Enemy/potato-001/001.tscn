@@ -67,10 +67,10 @@ animations = [{
 radius = 62.2013
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1ogv"]
-radius = 64.2857
+radius = 45.7366
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1ypo"]
-radius = 64.6813
+radius = 47.1429
 
 [sub_resource type="Animation" id="Animation_a1ogv"]
 resource_name = "Move"
@@ -114,7 +114,7 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="001" type="CharacterBody2D" node_paths=PackedStringArray("animation") groups=["Enamy"]]
+[node name="001" type="CharacterBody2D" node_paths=PackedStringArray("animation") groups=["Enemy"]]
 collision_layer = 5
 collision_mask = 3
 motion_mode = 1
@@ -159,7 +159,7 @@ script = ExtResource("4_h1ymn")
 max_health = 3
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["Enamy"]]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

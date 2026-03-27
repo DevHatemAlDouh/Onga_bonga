@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=4 uid="uid://b03vhiivy18vm"]
 
-[ext_resource type="Script" uid="uid://ddloa6lhdgug6" path="res://World/script/singlplayer.gd" id="1_dxpa5"]
-[ext_resource type="Texture2D" uid="uid://ccrgvi48na84l" path="res://BG/Asset/Grawend.png" id="2_rmuuv"]
-[ext_resource type="PackedScene" uid="uid://br70xqp46f5hb" path="res://Player/player.tscn" id="3_qq1o7"]
+[ext_resource type="Script" uid="uid://ddloa6lhdgug6" path="res://World/Scripts/singlplayer.gd" id="1_w5vne"]
+[ext_resource type="Texture2D" uid="uid://ccrgvi48na84l" path="res://BG/Asset/Grawend.png" id="2_hte1x"]
+[ext_resource type="PackedScene" uid="uid://br70xqp46f5hb" path="res://Player/player.tscn" id="3_x40gx"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yc365"]
 vertices = PackedVector2Array(24, 24, -24, 24, -24, -24, 24, -24)
@@ -23,7 +23,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, 24, -24, 24, 
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_46n4l"]
-texture = ExtResource("2_rmuuv")
+texture = ExtResource("2_hte1x")
 texture_region_size = Vector2i(48, 48)
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -88,7 +88,7 @@ navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_46n4l")
 
 [node name="World singlplayer" type="Node2D" node_paths=PackedStringArray("Enemy_list", "Enemy_spawner_list")]
-script = ExtResource("1_dxpa5")
+script = ExtResource("1_w5vne")
 Enamy_number = 20
 Enemy_list = NodePath("Enemys")
 Enemy_spawner_list = NodePath("Enamy_pos")
@@ -101,13 +101,18 @@ tile_set = SubResource("TileSet_mqv0h")
 
 [node name="XP" type="Node2D" parent="."]
 
+[node name="Heling items" type="Node2D" parent="."]
+
 [node name="Players" type="Node2D" parent="."]
 
-[node name="Player" parent="Players" instance=ExtResource("3_qq1o7")]
+[node name="Player" parent="Players" instance=ExtResource("3_x40gx")]
 
 [node name="Enemys" type="Node2D" parent="."]
 
 [node name="Spawner timer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="Enamy_pos" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Spawner timer" to="." method="_on_spawner_timer_timeout"]

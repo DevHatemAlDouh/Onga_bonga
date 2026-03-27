@@ -30,3 +30,7 @@ func _on_health_health_changed(_diff: int) -> void:
 
 func _on_hurt_box_got_hit() -> void:
 	prev_health = HP.get_health()
+
+
+func _on_heling_items_detactor_received_hp() -> void:
+	_set_heath()

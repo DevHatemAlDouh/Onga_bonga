@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl451gst3xr7d"]
+
+[ext_resource type="Script" uid="uid://bkn4hb54cnoa" path="res://Components/Scripts/heling_items_detactor.gd" id="1_o7vhv"]
+
+[node name="Heling_items_detactor" type="Area2D"]
+script = ExtResource("1_o7vhv")

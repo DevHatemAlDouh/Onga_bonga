@@ -4,6 +4,8 @@ extends Node2D
 
 @onready var E001 = preload("uid://is57xa3if7hx")
 
+@onready var spawner_timer: Timer = %"Spawner timer"
+
 @export var Enamy_number : int
 
 @export var Enemy_list : Node2D
@@ -22,7 +24,7 @@ func Spawner():
 		var SP = Spawn_point.instantiate()
 		SP.global_position = pos
 		Enemy_spawner_list.add_child(SP)
-	$"Spawner timer".start()
+	spawner_timer.start()
 
 func _process(_delta: float) -> void:
 	if Enemy_spawner_list.get_children().size() == 0:

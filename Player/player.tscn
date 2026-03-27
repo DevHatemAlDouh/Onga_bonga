@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene load_steps=18 format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
@@ -6,17 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://dxewwf8xymrh2" path="res://Components/UI/Health_bar.tscn" id="3_fhl08"]
 [ext_resource type="Script" uid="uid://tscn7y28rhmh" path="res://Components/Scripts/health.gd" id="3_gwnis"]
 [ext_resource type="Script" uid="uid://bhf6gsmednrk7" path="res://Components/Scripts/xp.gd" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://bkn4hb54cnoa" path="res://Components/Scripts/heling_items_detactor.gd" id="6_5htga"]
 [ext_resource type="Script" uid="uid://c5ljetnoa405n" path="res://Components/Scripts/xp_detactor.gd" id="6_fhl08"]
 [ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/Scenes/xp_bar.tscn" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
-[ext_resource type="PackedScene" uid="uid://bjbxfyct4io7g" path="res://Components/UI/retry.tscn" id="11_apopc"]
+[ext_resource type="Texture2D" uid="uid://bqe0oqh4n4l15" path="res://Components/UI/Retry.png" id="12_5htga"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 62.8013
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
 size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5o4e"]
+size = Vector2(127, 127)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
 size = Vector2(128, 128)
@@ -28,7 +32,7 @@ properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up") groups=["Player"]]
 collision_layer = 3
-collision_mask = 45
+collision_mask = 13
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
 Can_attack = NodePath("Can attack")
@@ -42,7 +46,6 @@ texture = ExtResource("1_l8h54")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_gwnis")
 max_health = 10
-immortality = true
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
 [node name="XP" type="Node" parent="."]
@@ -60,6 +63,15 @@ metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("RectangleShape2D_k53q1")
+
+[node name="Heling_items_detactor" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("6_5htga")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bkn4hb54cnoa"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heling_items_detactor"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_p5o4e")
 
 [node name="XP_detactor" type="Area2D" parent="."]
 script = ExtResource("6_fhl08")
@@ -153,10 +165,20 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("10_x3vf3")
 
-[node name="Retry" parent="UI/Death screen/BoxContainer/VBoxContainer" instance=ExtResource("11_apopc")]
+[node name="Retry" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+
+[node name="Replay" type="Button" parent="UI/Death screen/BoxContainer/VBoxContainer/Retry"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("12_5htga")
+flat = true
 
 [node name="Wapons" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -195,5 +217,7 @@ replication_config = SubResource("SceneReplicationConfig_apopc")
 [connection signal="max_xp_changed" from="XP" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_max_xp_changed"]
 [connection signal="xp_changed" from="XP" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_xp_changed"]
 [connection signal="got_hit" from="HurtBox" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_hurt_box_got_hit"]
+[connection signal="received_HP" from="Heling_items_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_heling_items_detactor_received_hp"]
 [connection signal="received_XP" from="XP_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_detactor_received_xp"]
+[connection signal="pressed" from="UI/Death screen/BoxContainer/VBoxContainer/Retry/Replay" to="." method="_on_replay_pressed"]
 [connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]

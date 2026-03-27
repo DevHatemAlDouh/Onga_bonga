@@ -1,17 +1,14 @@
-class_name XP_Orn
+class_name XP_Orb
 extends Area2D
 
 signal free_me
 
-var Xp: float
+var Xp: int
 
 func _ready() -> void:
-	Xp = randf_range(1,5)
+	Xp = randi_range(1,5)
 
-func set_xp(value:float):
-	Xp = value
-
-func get_xp() -> float:
+func get_xp() -> int:
 	return Xp
 
 func depleted():

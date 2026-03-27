@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 NetworkHandler="*res://Components/Scripts/network_handler.gd"
+TileRunInstancesGlobal="*res://addons/tile-run-instances/tile_run_instances_global.gd"
 
 [display]
 
@@ -28,23 +29,31 @@ window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tile-run-instances/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
 "res://Components/Scenes/": "blue",
 "res://Components/Scripts/": "yellow",
 "res://Components/UI/": "red",
+"res://Items/Scenes/": "blue",
+"res://Items/Scripts/": "yellow",
+"res://Items/UI/": "red",
 "res://Projectile/Scenes/": "blue",
 "res://Projectile/Scripts/": "yellow",
 "res://Projectile/UI/": "red",
-"res://World/scenes/": "blue",
-"res://World/script/": "yellow"
+"res://World/Scenes/": "blue",
+"res://World/Scripts/": "yellow"
 }
 
 [global_group]
 
-Enamy=""
 Player=""
+Enemy=""
+Player_projectiles=""
 
 [input]
 

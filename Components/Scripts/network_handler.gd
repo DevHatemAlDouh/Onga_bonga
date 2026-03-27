@@ -32,6 +32,7 @@ func spawn_player(id: int) -> void:
 	pos.x = randf_range(-1000,1000)
 	pos.y = randf_range(-1000,1000)
 	var player = PLAYER.instantiate()
+	player._multiplayer = true
 	player.name = str(id)
 	player.global_position = pos
 	get_tree().current_scene.add_child(player,true)

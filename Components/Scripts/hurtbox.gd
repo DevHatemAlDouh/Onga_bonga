@@ -14,6 +14,8 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is HitBox:
 		var hitbox: HitBox = area
 		if hitbox != null:
-			if get_parent().get_parent().name != hitbox.get_parent().get_parent().get_parent().name:
+			if get_parent().is_in_group("Player") && hitbox.get_parent().is_in_group("Player_projectiles"):
+				pass
+			else :
 				got_hit.emit()
 				health.health -= hitbox.damage

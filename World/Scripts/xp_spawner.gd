@@ -3,7 +3,7 @@ extends MultiplayerSpawner
 const XP_ORB = preload("uid://dh4wshijexd47")
 
 func _on_enemy_spawner_enemy_is_ready(enemy: Variant) -> void:
-	enemy.Not_live.connect(spawn_xp.bind(enemy))
+	enemy.Not_live_xp.connect(spawn_xp.bind(enemy))
 
 func spawn_xp(enemy):
 	var xp = XP_ORB.instantiate()
