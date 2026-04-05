@@ -8,30 +8,34 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Onga Bonga"
 run/main_scene="uid://cp4bi3t5c8s5q"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 NetworkHandler="*res://Components/Scripts/network_handler.gd"
 TileRunInstancesGlobal="*res://addons/tile-run-instances/tile_run_instances_global.gd"
+GameManager="*uid://dhuiumecmh8cy"
 
 [display]
 
 window/size/viewport_width=480
 window/size/viewport_height=270
-window/size/always_on_top=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tile-run-instances/plugin.cfg")
+enabled=PackedStringArray("res://addons/tile-run-instances/plugin.cfg", "res://addons/tube/plugin.cfg")
 
 [file_customization]
 
@@ -99,3 +103,4 @@ Settings={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

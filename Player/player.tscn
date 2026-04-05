@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://br70xqp46f5hb"]
+[gd_scene format=3 uid="uid://br70xqp46f5hb"]
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://fwuirhwta6q8" path="res://icon.svg" id="1_l8h54"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/Scenes/xp_bar.tscn" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
-[ext_resource type="Texture2D" uid="uid://bqe0oqh4n4l15" path="res://Components/UI/Retry.png" id="12_5htga"]
+[ext_resource type="Texture2D" uid="uid://d4lxsq8nqdbfi" path="res://Components/UI/cope.png" id="13_gu6f8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 62.8013
@@ -25,12 +25,19 @@ size = Vector2(127, 127)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtle1"]
 size = Vector2(128, 128)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5htga"]
+load_path = "res://.godot/imported/Retry.png-a76a4d595fa644b3838b6b1bda123c2e.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p5o4e"]
+load_path = "res://.godot/imported/Quit.png-9e40bb29d4adaaf8489cb552d05fbf87.ctex"
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_apopc"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=307889494 node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up") groups=["Player"]]
+z_index = 10
 collision_layer = 3
 collision_mask = 13
 wall_min_slide_angle = 0.0
@@ -40,54 +47,54 @@ Death_screen = NodePath("UI/Death screen")
 Player_UI = NodePath("UI/Player UI")
 Can_level_up = NodePath("UI/Player UI/BoxContainer/Control/LevelUp2")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=1003606299]
 texture = ExtResource("1_l8h54")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=2141201883]
 script = ExtResource("3_gwnis")
 max_health = 10
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
-[node name="XP" type="Node" parent="."]
+[node name="XP" type="Node" parent="." unique_id=487783865]
 script = ExtResource("4_vtle1")
 max_xp = 20.0
 metadata/_custom_type_script = "uid://bhf6gsmednrk7"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1435220923]
 shape = SubResource("CircleShape2D_k53q1")
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1826649057 node_paths=PackedStringArray("health")]
 script = ExtResource("2_4ntmi")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1081034559]
 shape = SubResource("RectangleShape2D_k53q1")
 
-[node name="Heling_items_detactor" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="Heling_items_detactor" type="Area2D" parent="." unique_id=1087238307 node_paths=PackedStringArray("health")]
 script = ExtResource("6_5htga")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bkn4hb54cnoa"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Heling_items_detactor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heling_items_detactor" unique_id=1400937519]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_p5o4e")
 
-[node name="XP_detactor" type="Area2D" parent="."]
+[node name="XP_detactor" type="Area2D" parent="." unique_id=71053386]
 script = ExtResource("6_fhl08")
 metadata/_custom_type_script = "uid://c5ljetnoa405n"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="XP_detactor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XP_detactor" unique_id=1440977847]
 shape = SubResource("RectangleShape2D_vtle1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=518811761]
 unique_name_in_owner = true
 zoom = Vector2(0.2, 0.2)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1204922847]
 unique_name_in_owner = true
 
-[node name="Player UI" type="Control" parent="UI"]
+[node name="Player UI" type="Control" parent="UI" unique_id=2030764488]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,35 +102,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="UI/Player UI"]
+[node name="BoxContainer" type="BoxContainer" parent="UI/Player UI" unique_id=80383836]
 layout_mode = 0
 offset_right = 249.0
 offset_bottom = 14.0
 
-[node name="Control" type="HBoxContainer" parent="UI/Player UI/BoxContainer"]
+[node name="Control" type="HBoxContainer" parent="UI/Player UI/BoxContainer" unique_id=1690955293]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Player UI/BoxContainer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Player UI/BoxContainer/Control" unique_id=1251665573]
 layout_mode = 2
 
-[node name="Health Bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
+[node name="Health Bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" unique_id=1008662623 node_paths=PackedStringArray("HP") instance=ExtResource("3_fhl08")]
 custom_minimum_size = Vector2(240, 5)
 layout_mode = 2
 HP = NodePath("../../../../../../Health")
 
-[node name="XP_bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
+[node name="XP_bar" parent="UI/Player UI/BoxContainer/Control/VBoxContainer" unique_id=820498501 node_paths=PackedStringArray("Xp") instance=ExtResource("8_od3ui")]
 custom_minimum_size = Vector2(240, 5)
 layout_mode = 2
 size_flags_vertical = 1
 Xp = NodePath("../../../../../../XP")
 
-[node name="LevelUp2" type="TextureRect" parent="UI/Player UI/BoxContainer/Control"]
+[node name="LevelUp2" type="TextureRect" parent="UI/Player UI/BoxContainer/Control" unique_id=1186849524]
 visible = false
 layout_mode = 2
 texture = ExtResource("9_00tjw")
 expand_mode = 2
 
-[node name="Death screen" type="Control" parent="UI"]
+[node name="Death screen" type="Control" parent="UI" unique_id=1666779860]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -131,7 +138,7 @@ offset_right = 480.0
 offset_bottom = 270.0
 size_flags_horizontal = 4
 
-[node name="ColorRect" type="ColorRect" parent="UI/Death screen"]
+[node name="ColorRect" type="ColorRect" parent="UI/Death screen" unique_id=27815000]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -140,7 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.23, 0.23, 0.23, 0.588235)
 
-[node name="BoxContainer" type="BoxContainer" parent="UI/Death screen"]
+[node name="BoxContainer" type="BoxContainer" parent="UI/Death screen" unique_id=441128087]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,16 +155,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Death screen/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Death screen/BoxContainer" unique_id=547703130]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Game over" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer"]
+[node name="Game over" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer" unique_id=665395063]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
-[node name="TextureRect" type="TextureRect" parent="UI/Death screen/BoxContainer/VBoxContainer/Game over"]
+[node name="TextureRect" type="TextureRect" parent="UI/Death screen/BoxContainer/VBoxContainer/Game over" unique_id=400658997]
 layout_mode = 0
 offset_left = -32.0
 offset_top = -32.0
@@ -165,50 +172,115 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture = ExtResource("10_x3vf3")
 
-[node name="Retry" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer"]
+[node name="Retry" type="Control" parent="UI/Death screen/BoxContainer/VBoxContainer" unique_id=93097277]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Replay" type="Button" parent="UI/Death screen/BoxContainer/VBoxContainer/Retry"]
+[node name="Retry" type="Button" parent="UI/Death screen/BoxContainer/VBoxContainer/Retry" unique_id=988412303]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("12_5htga")
+theme_override_constants/icon_max_width = 20
+text = "Play again"
+icon = SubResource("CompressedTexture2D_5htga")
+flat = true
+icon_alignment = 2
+
+[node name="Settings" type="Control" parent="UI" unique_id=956513401]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Settings" unique_id=934411671]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Settings/PanelContainer" unique_id=1541130340]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Settings/PanelContainer/MarginContainer" unique_id=991725042]
+layout_mode = 2
+
+[node name="Lobby info" type="HBoxContainer" parent="UI/Settings/PanelContainer/MarginContainer/VBoxContainer" unique_id=2096656170]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Lobby Id" type="Label" parent="UI/Settings/PanelContainer/MarginContainer/VBoxContainer/Lobby info" unique_id=438432428]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Copy Lobby Id" type="Button" parent="UI/Settings/PanelContainer/MarginContainer/VBoxContainer/Lobby info" unique_id=1024944546]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 50
+icon = ExtResource("13_gu6f8")
 flat = true
 
-[node name="Wapons" type="Node2D" parent="."]
+[node name="Leave" type="Button" parent="UI/Settings/PanelContainer/MarginContainer/VBoxContainer" unique_id=464481825]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "To main menu"
+icon = SubResource("CompressedTexture2D_p5o4e")
+flat = true
+icon_alignment = 2
+
+[node name="Wapons" type="Node2D" parent="." unique_id=721687856]
 unique_name_in_owner = true
 
-[node name="W1" type="Marker2D" parent="Wapons"]
+[node name="W1" type="Marker2D" parent="Wapons" unique_id=2057725854]
 
-[node name="W2" type="Marker2D" parent="Wapons"]
+[node name="W2" type="Marker2D" parent="Wapons" unique_id=18751943]
 position = Vector2(90, -90)
 
-[node name="W3" type="Marker2D" parent="Wapons"]
+[node name="W3" type="Marker2D" parent="Wapons" unique_id=1308717789]
 position = Vector2(120, 0)
 
-[node name="W4" type="Marker2D" parent="Wapons"]
+[node name="W4" type="Marker2D" parent="Wapons" unique_id=1282314557]
 position = Vector2(90, 90)
 
-[node name="W5" type="Marker2D" parent="Wapons"]
+[node name="W5" type="Marker2D" parent="Wapons" unique_id=1828622375]
 position = Vector2(0, 120)
 
-[node name="W6" type="Marker2D" parent="Wapons"]
+[node name="W6" type="Marker2D" parent="Wapons" unique_id=1590011968]
 position = Vector2(-90, 90)
 
-[node name="W7" type="Marker2D" parent="Wapons"]
+[node name="W7" type="Marker2D" parent="Wapons" unique_id=2036958528]
 position = Vector2(-120, 0)
 
-[node name="W8" type="Marker2D" parent="Wapons"]
+[node name="W8" type="Marker2D" parent="Wapons" unique_id=1456883860]
 position = Vector2(-90, -90)
 
-[node name="Can attack" type="Timer" parent="."]
+[node name="Can attack" type="Timer" parent="." unique_id=1888641155]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=240623040]
 replication_config = SubResource("SceneReplicationConfig_apopc")
 
 [connection signal="health_changed" from="Health" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_health_health_changed"]
@@ -219,5 +291,6 @@ replication_config = SubResource("SceneReplicationConfig_apopc")
 [connection signal="got_hit" from="HurtBox" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_hurt_box_got_hit"]
 [connection signal="received_HP" from="Heling_items_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_heling_items_detactor_received_hp"]
 [connection signal="received_XP" from="XP_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_detactor_received_xp"]
-[connection signal="pressed" from="UI/Death screen/BoxContainer/VBoxContainer/Retry/Replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="UI/Death screen/BoxContainer/VBoxContainer/Retry/Retry" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="UI/Settings/PanelContainer/MarginContainer/VBoxContainer/Leave" to="." method="_on_replay_pressed"]
 [connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]

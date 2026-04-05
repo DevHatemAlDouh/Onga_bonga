@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh4wshijexd47"]
+[gd_scene format=3 uid="uid://dh4wshijexd47"]
 
-[ext_resource type="Script" uid="uid://ce8perc7xouce" path="res://Components/Scripts/XP_Orb.gd" id="1_nayqo"]
+[ext_resource type="Script" uid="uid://ce8perc7xouce" path="res://Components/Scripts/xp_orb.gd" id="1_nayqo"]
 [ext_resource type="Texture2D" uid="uid://bhrre0l2f4x0b" path="res://Components/UI/Xp_orb.png" id="2_nayqo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21itc"]

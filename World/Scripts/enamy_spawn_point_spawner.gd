@@ -4,8 +4,12 @@ extends MultiplayerSpawner
 @onready var enemys: Node2D = %Enemys
 @onready var enamy_pos: Node2D = %Enamy_pos
 @onready var spawner_timer: Timer = %"Spawner timer"
+@onready var start: Button = %Start
 
 @export var Enamy_number : int
+
+func _ready() -> void:
+	start.pressed.connect(_spawn)
 
 func Spawner():
 	for i in randf_range(1,Enamy_number):
@@ -18,9 +22,8 @@ func Spawner():
 		get_node(spawn_path).add_child(SP,true)
 	spawner_timer.start()
 
-func _process(_delta: float) -> void:
-	if OS.has_feature('Server'):
-		if get_tree().get_nodes_in_group("Player").size() > 0:
+func _spawn() -> void:
+	if get_tree().get_nodes_in_group("Player").size() > 0:
 			if enamy_pos.get_children().size() == 0:
 				if enemys.get_children().size() == 0:
 					Spawner()

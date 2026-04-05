@@ -1,15 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://h1dsapjhjpob"]
+[gd_scene format=3 uid="uid://h1dsapjhjpob"]
 
 [ext_resource type="Script" uid="uid://cae5d8tmjsem1" path="res://Components/Scripts/main_menu.gd" id="1_lya5o"]
 [ext_resource type="Texture2D" uid="uid://d2v02lli4im2n" path="res://Components/UI/Play.png" id="2_8ujs1"]
 [ext_resource type="Texture2D" uid="uid://bm5lh2ptxvxss" path="res://Components/UI/Quit.png" id="2_lya5o"]
-[ext_resource type="Texture2D" uid="uid://un2c6ufm7u8i" path="res://Components/UI/singl player.png" id="4_5mfhq"]
-[ext_resource type="Texture2D" uid="uid://bysxwcv2cdrmf" path="res://Components/UI/multi player.png" id="5_g1y7o"]
+[ext_resource type="Texture2D" uid="uid://cdbaoxmtc0dod" path="res://Components/UI/Add_player.png" id="5_3qgy5"]
+[ext_resource type="Texture2D" uid="uid://dpl6hj8e5jnxy" path="res://Components/UI/online.png" id="5_6rm0l"]
+[ext_resource type="Texture2D" uid="uid://bue8gl1wkbv2q" path="res://Components/UI/start server.png" id="6_3qgy5"]
 
-[node name="Main menu" type="CanvasLayer"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3qgy5"]
+load_path = "res://.godot/imported/local.png-f4f5e5dceb59120e0be988bf6b5e51f1.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_unle2"]
+load_path = "res://.godot/imported/singl player.png-a3b26ad7b151e7a8f2536df6d9476902.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0dgsh"]
+load_path = "res://.godot/imported/multi player.png-c28a6566d76480124466a769c5a6d401.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fuu1k"]
+load_path = "res://.godot/imported/local.png-f4f5e5dceb59120e0be988bf6b5e51f1.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xa5or"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0dgsh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rm0l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3qgy5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unle2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuu1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0giom"]
+
+[sub_resource type="Theme" id="Theme_xa5or"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_6rm0l")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_3qgy5")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_unle2")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_fuu1k")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_0giom")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ng8by"]
+
+[node name="Main menu" type="CanvasLayer" unique_id=1200597284]
 script = ExtResource("1_lya5o")
 
-[node name="Start" type="Control" parent="."]
+[node name="Start" type="Control" parent="." unique_id=1915977572]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -18,128 +54,372 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Start"]
+[node name="PanelContainer" type="PanelContainer" parent="Start" unique_id=462112852]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = -94.0
-offset_right = 56.0
-offset_bottom = 94.0
+offset_left = -50.0
+offset_top = -53.0
+offset_right = 50.0
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Start/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Start/PanelContainer" unique_id=819021731]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Start/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Start/PanelContainer/MarginContainer" unique_id=56133412]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer" unique_id=1839966283]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Play"
+icon = ExtResource("2_8ujs1")
+flat = true
+icon_alignment = 2
+
+[node name="Quit" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer" unique_id=2100837486]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Quit"
+icon = ExtResource("2_lya5o")
+flat = true
+icon_alignment = 2
+
+[node name="Servet type" type="Control" parent="." unique_id=298891233]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Servet type" unique_id=1870589678]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Servet type/PanelContainer" unique_id=429661057]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Servet type/PanelContainer/MarginContainer" unique_id=195177228]
+layout_mode = 2
+
+[node name="Local mode" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer" unique_id=967786337]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Local mode"
+icon = SubResource("CompressedTexture2D_3qgy5")
+flat = true
+icon_alignment = 2
+
+[node name="Online mode" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer" unique_id=222911469]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Online mode"
+icon = ExtResource("5_6rm0l")
+flat = true
+icon_alignment = 2
+
+[node name="To main menu" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer" unique_id=1823070032]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Back "
+icon = ExtResource("2_lya5o")
+flat = true
+icon_alignment = 2
+
+[node name="Local" type="Control" parent="." unique_id=440797696]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Local" unique_id=1747885363]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Local/PanelContainer" unique_id=987549449]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Local/PanelContainer/MarginContainer" unique_id=125892219]
+layout_mode = 2
+
+[node name="Singlplayer" type="Button" parent="Local/PanelContainer/MarginContainer/VBoxContainer" unique_id=1027543723]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Singlplayer"
+icon = SubResource("CompressedTexture2D_unle2")
+flat = true
+icon_alignment = 2
+
+[node name="Multiplayer" type="Button" parent="Local/PanelContainer/MarginContainer/VBoxContainer" unique_id=1390073102]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Multiplayer"
+icon = SubResource("CompressedTexture2D_0dgsh")
+flat = true
+icon_alignment = 2
+
+[node name="To server type" type="Button" parent="Local/PanelContainer/MarginContainer/VBoxContainer" unique_id=1374515888]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Back"
+icon = ExtResource("2_lya5o")
+flat = true
+icon_alignment = 2
+
+[node name="Local server" type="Control" parent="." unique_id=597957299]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Local server" unique_id=1154435903]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Local server/PanelContainer" unique_id=679670045]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Local server/PanelContainer/MarginContainer" unique_id=1674016749]
+layout_mode = 2
+
+[node name="Host" type="Button" parent="Local server/PanelContainer/MarginContainer/VBoxContainer" unique_id=1361110236]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Host"
+icon = SubResource("CompressedTexture2D_fuu1k")
+flat = true
+icon_alignment = 2
+
+[node name="Player" type="Button" parent="Local server/PanelContainer/MarginContainer/VBoxContainer" unique_id=776174749]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Player"
+icon = ExtResource("5_3qgy5")
+flat = true
+icon_alignment = 2
+
+[node name="To server type" type="Button" parent="Local server/PanelContainer/MarginContainer/VBoxContainer" unique_id=1010992013]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
+text = "Back"
+icon = ExtResource("2_lya5o")
+flat = true
+icon_alignment = 2
+
+[node name="Online server" type="Control" parent="." unique_id=1422411362]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Online server" unique_id=87630486]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Online server/PanelContainer" unique_id=1759580065]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Online server/PanelContainer/MarginContainer" unique_id=1857481248]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer" unique_id=1595711179]
+layout_mode = 2
+
+[node name="Add lobby" type="Button" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=849526482]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 50
+text = "Start lobby"
+icon = ExtResource("6_3qgy5")
+flat = true
+icon_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1032462426]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xa5or")
+
+[node name="To server type" type="Button" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=867643583]
+layout_mode = 2
+theme_override_constants/icon_max_width = 50
+text = "Back"
+icon = ExtResource("2_lya5o")
+flat = true
+icon_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="Online server/PanelContainer/MarginContainer/HBoxContainer" unique_id=837924834]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_0dgsh")
+
+[node name="PanelContainer" type="PanelContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer" unique_id=1524384313]
+custom_minimum_size = Vector2(120, 200)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=655421508]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=972581147]
+layout_mode = 2
+theme = SubResource("Theme_xa5or")
+
+[node name="Lobbies" type="VBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer" unique_id=948930866]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies" unique_id=2071960324]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2" unique_id=1632696026]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer" unique_id=176899571]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1484322468]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Lobby id:"
+
+[node name="LineEdit" type="LineEdit" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=356730060]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="ID" type="Label" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=51933727]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "55286"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer" unique_id=836131405]
+layout_mode = 2
+
+[node name="Player_count" type="Label" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=2011962866]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2"
+
+[node name="max_players" type="Label" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=1066993527]
+layout_mode = 2
+text = "/4"
+
+[node name="VSeparator" type="VSeparator" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=2143097755]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ng8by")
+
+[node name="Join lobby" type="Button" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=1965536069]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 20
 icon = ExtResource("2_8ujs1")
 flat = true
 
-[node name="Quit" type="Button" parent="Start/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-icon = ExtResource("2_lya5o")
-flat = true
-
-[node name="Servet type" type="Control" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Servet type"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Servet type/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Servet type/PanelContainer/MarginContainer"]
+[node name="HSeparator" type="HSeparator" parent="Online server/PanelContainer/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/ScrollContainer/Lobbies" unique_id=1392610749]
 layout_mode = 2
 
-[node name="Singlplayer" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-icon = ExtResource("4_5mfhq")
-flat = true
-
-[node name="Multiplayer" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-icon = ExtResource("5_g1y7o")
-flat = true
-
-[node name="Back" type="Button" parent="Servet type/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-icon = ExtResource("2_lya5o")
-flat = true
-
-[node name="Lobby" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Lobby/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Lobby/PanelContainer/MarginContainer"]
-layout_mode = 2
+[connection signal="pressed" from="Local/PanelContainer/MarginContainer/VBoxContainer/To server type" to="." method="_on_to_server_type_pressed"]
+[connection signal="pressed" from="Local server/PanelContainer/MarginContainer/VBoxContainer/To server type" to="." method="_on_to_server_type_pressed"]
+[connection signal="pressed" from="Online server/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/To server type" to="." method="_on_to_server_type_pressed"]

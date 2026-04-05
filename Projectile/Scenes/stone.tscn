@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8hh3mh3k5e4n"]
+[gd_scene format=3 uid="uid://8hh3mh3k5e4n"]
 
 [ext_resource type="Script" uid="uid://cuskj8c6slti2" path="res://Projectile/Scripts/stone.gd" id="1_rdoop"]
 [ext_resource type="Texture2D" uid="uid://bpsmtd0wqbsfh" path="res://Projectile/UI/Stone.png" id="2_jml8x"]
@@ -44,33 +44,31 @@ _data = {
 &"Roling": SubResource("Animation_gu4rw")
 }
 
-[node name="Stone" type="Node2D" node_paths=PackedStringArray("Attack_duration", "animation") groups=["Player_projectiles"]]
+[node name="Stone" type="Node2D" unique_id=895432319 node_paths=PackedStringArray("Attack_duration", "animation") groups=["Player_projectiles"]]
 script = ExtResource("1_rdoop")
 Speed = 5.0
 Attack_duration = NodePath("Attack")
 animation = NodePath("AnimationPlayer")
 
-[node name="Stone" type="Sprite2D" parent="."]
+[node name="Stone" type="Sprite2D" parent="." unique_id=1597594351]
 texture = ExtResource("2_jml8x")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." unique_id=121093788]
 script = ExtResource("2_rdoop")
 damage = 2
 metadata/_custom_type_script = "uid://o0og1idrbini"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1968426104]
 scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_k80n2")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=115444147]
 
-[node name="Attack" type="Timer" parent="."]
+[node name="Attack" type="Timer" parent="." unique_id=555093153]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_8mvj2")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1437675070]
+libraries/ = SubResource("AnimationLibrary_8mvj2")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

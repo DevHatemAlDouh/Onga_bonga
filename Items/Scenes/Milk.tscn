@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://n5hp6gvreery"]
+[gd_scene format=3 uid="uid://n5hp6gvreery"]
 
 [ext_resource type="Script" uid="uid://cuwti7yq76p8u" path="res://Items/Scripts/milk.gd" id="1_3x7w4"]
 [ext_resource type="Texture2D" uid="uid://bhuuglklkoioa" path="res://Items/UI/Milk.png" id="2_mulhe"]
@@ -12,15 +12,15 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="Milk" type="Area2D"]
+[node name="Milk" type="Area2D" unique_id=822323275]
 script = ExtResource("1_3x7w4")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Sprite2D" parent="." unique_id=522676158]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_mulhe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1334965074]
 shape = SubResource("CapsuleShape2D_uyy3p")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=734461080]
 replication_config = SubResource("SceneReplicationConfig_v78j7")
