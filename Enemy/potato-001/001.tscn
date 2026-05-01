@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://is57xa3if7hx"]
+[gd_scene format=3 uid="uid://is57xa3if7hx"]
 
 [ext_resource type="Script" uid="uid://bjf2wmjytbn0l" path="res://Enemy/potato-001/001.gd" id="1_a1ogv"]
 [ext_resource type="Script" uid="uid://o0og1idrbini" path="res://Components/Scripts/hitbox.gd" id="2_a1ogv"]
@@ -64,7 +64,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0arr3"]
-radius = 62.2013
+radius = 44.285713
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1ogv"]
 radius = 45.7366
@@ -114,7 +114,7 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="001" type="CharacterBody2D" node_paths=PackedStringArray("animation") groups=["Enemy"]]
+[node name="001" type="CharacterBody2D" unique_id=1859116256 node_paths=PackedStringArray("animation") groups=["Enemy"]]
 collision_layer = 5
 collision_mask = 3
 motion_mode = 1
@@ -122,59 +122,54 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_a1ogv")
 animation = NodePath("AnimationPlayer")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1909704146]
 position = Vector2(0, -1.49012e-06)
 scale = Vector2(2.8125, 2.8125)
 sprite_frames = SubResource("SpriteFrames_wd5rk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641270617]
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_0arr3")
 debug_color = Color(1, 1, 1, 0.42)
 
-[node name="HitBox" type="Area2D" parent="."]
-visible = false
+[node name="HitBox" type="Area2D" parent="." unique_id=910856043]
 script = ExtResource("2_a1ogv")
 damage = 3
 metadata/_custom_type_script = "uid://o0og1idrbini"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1828357236]
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_a1ogv")
 debug_color = Color(0.555773, 0, 0.147799, 0.42)
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-visible = false
+[node name="HurtBox" type="Area2D" parent="." unique_id=245069202 node_paths=PackedStringArray("health")]
 script = ExtResource("3_g1ypo")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2120059112]
 scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_g1ypo")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=879274734]
 script = ExtResource("4_h1ymn")
 max_health = 3
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=458391888]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1633705258]
 wait_time = 0.2
 autostart = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_g1ypo")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=720187388]
+libraries/ = SubResource("AnimationLibrary_g1ypo")
 
-[node name="Got hit" type="Timer" parent="."]
+[node name="Got hit" type="Timer" parent="." unique_id=504636405]
 wait_time = 0.1
 one_shot = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=761681724]
 replication_config = SubResource("SceneReplicationConfig_7mcqy")
 
 [connection signal="got_hit" from="HurtBox" to="." method="_on_hurt_box_got_hit"]

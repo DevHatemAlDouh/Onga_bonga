@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var Stone = preload("uid://8hh3mh3k5e4n")
-@onready var wapons: Node2D = %Wapons
+@onready var wapon: Marker2D = %Wapon
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var ui: CanvasLayer = %UI
 @onready var settings: Control = %Settings
@@ -10,26 +10,70 @@ extends CharacterBody2D
 @onready var leave: Button = %Leave
 @onready var retry: Button = %Retry
 @onready var lobby_info: HBoxContainer = %"Lobby info"
+@onready var ping: Label = %Ping
+@onready var ping_timeout: Timer = %Ping_timeout
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 
-
-const SPEED = 500.0
 @export var Can_attack: Timer
 @export var Death_screen : Control
 @export var Player_UI : Control
 @export var Can_level_up : TextureRect
+
+var SPEED = 500.0
 var _multiplayer : bool 
 var can_attack = true
 var Death = false
+
 
 func _enter_tree() -> void:
 	if _multiplayer:
 		set_multiplayer_authority(int(name))
 
 func _ready() -> void:
+	ping_timeout.timeout.connect(func():rpc("Ping"))
 	if is_multiplayer_authority():
 		camera_2d.make_current()
 	else:
 		ui.hide()
+
+@rpc ("any_peer","call_local")
+
+func Ping():
+	ping_timeout.start()
+	#ping.text = "Ping: "+str(get_heartbeat_interval())+"ms"
+	
+
+func _physics_process(_delta: float) -> void:
+	if !Death:
+		if NetworkHandler.tube_enabed:
+			lobby_info.show()
+			lobby_id.text = "Lobby Id: "+str(NetworkHandler.tube_client.session_id)
+			copy_lobby_id.pressed.connect(func(): DisplayServer.clipboard_set(NetworkHandler.tube_client.session_id))
+		if Input.is_action_just_pressed("Settings"):
+			settings.visible = !settings.visible
+			Engine.time_scale = !settings.visible
+		if can_attack:
+			var new_wapon = Wapon()
+			if new_wapon:
+				Can_attack.start(new_wapon)
+				can_attack = false
+		if _multiplayer and !NetworkHandler.tube_enabed:
+			if !is_multiplayer_authority():return
+		velocity = Input.get_vector("Left", "Right","Top", "Down").normalized() * SPEED
+		_animation()
+		move_and_slide()
+
+func _animation():
+	if velocity != Vector2.ZERO:
+		if !animation_player.is_playing():
+				animation_player.play("move")
+		if velocity.x > 0:
+			animated_sprite_2d.flip_h = false
+		elif velocity.x < 0:
+			animated_sprite_2d.flip_h = true
+	else:
+		animation_player.play("RESET")
 
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
@@ -49,35 +93,14 @@ func makepath():
 					shotrest_distance = Enemy_distance
 	return Nerast_enamy
 
-func wapon():
-	var Wapon = wapons.get_children()
+func Wapon():
 	var enemy = makepath()
 	if enemy != Vector2.ZERO:
 		var stone = Stone.instantiate()
 		get_tree().current_scene.add_child(stone)
 		stone.Attack(enemy)
-		stone.global_position = Wapon[0].global_position
+		stone.global_position = wapon.global_position
 		return stone.get_attack_speed()
-
-func _physics_process(_delta: float) -> void:
-	if !Death:
-		if NetworkHandler.tube_enabed:
-			lobby_info.show()
-			lobby_id.text = "Lobby Id: "+str(NetworkHandler.tube_client.session_id)
-			copy_lobby_id.pressed.connect(func(): DisplayServer.clipboard_set(NetworkHandler.tube_client.session_id))
-			#DisplayServer.clipboard_set(NetworkHandler.tube_client.session_id)
-		if Input.is_action_just_pressed("Settings"):
-			settings.visible = !settings.visible
-			Engine.time_scale = !settings.visible
-		if can_attack:
-			var new_wapon = wapon()
-			if new_wapon:
-				Can_attack.start(new_wapon)
-				can_attack = false
-		if _multiplayer and !NetworkHandler.tube_enabed:
-			if !is_multiplayer_authority():return
-		velocity = Input.get_vector("Left", "Right","Top", "Down").normalized() * SPEED
-		move_and_slide()
 
 func _on_can_attack_timeout() -> void:
 	can_attack = true
@@ -85,8 +108,8 @@ func _on_can_attack_timeout() -> void:
 func death():
 	Death = true 
 	Death_screen.visible = Death
-	if _multiplayer:
-		if !is_multiplayer_authority():return
+	animation_player.play("RESET")
+	if !_multiplayer:
 		Engine.time_scale = 0
 
 func _on_health_health_depleted() -> void:
@@ -101,5 +124,6 @@ func _on_replay_pressed() -> void:
 		retry.disabled = true
 		NetworkHandler.leave_server()
 	else:
+		if !is_multiplayer_authority():return
 		Engine.time_scale = 1
 	get_tree().reload_current_scene()

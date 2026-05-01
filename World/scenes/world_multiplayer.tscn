@@ -100,6 +100,7 @@ tile_map_data = PackedByteArray("AAD+//3/AQADAAAAAAD+//z/AQADAAAAAAD9//3/AQADAAA
 tile_set = SubResource("TileSet_7l666")
 
 [node name="XP" type="Node2D" parent="." unique_id=1787579390]
+unique_name_in_owner = true
 
 [node name="Heling items" type="Node2D" parent="." unique_id=438180206]
 

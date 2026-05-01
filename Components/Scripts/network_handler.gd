@@ -7,7 +7,7 @@ const TUBE_CONTEXT = preload("uid://dhuaw52wgojo4")
 
 const IP_ADDRESS :String = "127.0.0.1"
 
-const PORT: int = 9999
+const PORT: int = 0
 
 var tube_client := TubeClient.new()
 var tube_enabed = false
@@ -33,20 +33,6 @@ func tube_join(secsion_id: String):
 	multiplayer.peer_disconnected.connect(remove_player)
 	multiplayer.connected_to_server.connect(on_connect_to_server)
 	tube_client.join_session(secsion_id)
-
-func start_server() -> void:
-	peer.create_server(PORT)
-	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(spawn_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-
-
-func join_server() -> void:
-	peer.create_client(IP_ADDRESS,PORT)
-	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(spawn_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-	multiplayer.connected_to_server.connect(on_connect_to_server)
 
 
 func on_connect_to_server():
@@ -83,8 +69,7 @@ func remove_player(id):
 
 
 func leave_server():
-	if tube_enabed:
-		tube_client.leave_session()
+	tube_client.leave_session()
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	clean_up_signals()
