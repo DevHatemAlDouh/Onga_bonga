@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const Speed = 200
+var Speed = 200
 
 @onready var Xp = preload("uid://dh4wshijexd47")
 
@@ -23,6 +23,10 @@ func _physics_process(_delta: float) -> void:
 		animation.play("Move")
 	var dir = to_local(nav_agent.get_next_path_position()).normalized()
 	var GP_b = global_position.x
+	if GameManager.is_it_day_yeat():
+		Speed = 100
+	else:
+		Speed = 200
 	velocity = dir * Speed
 	move_and_slide()
 	if GP_b > global_position.x:

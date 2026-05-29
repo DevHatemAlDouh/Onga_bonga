@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dqcjwf7l3wakh"]
+
+[ext_resource type="Script" uid="uid://6v84oqxqkvn8" path="res://Components/Scripts/Day_night_cycle.gd" id="1_bp3rm"]
+
+[sub_resource type="Animation" id="Animation_bl0uy"]
+resource_name = "DNC"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.078431375), Color(0, 0, 0, 0.47058824)]
+}
+
+[sub_resource type="Animation" id="Animation_qikce"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.078431375)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyeql"]
+_data = {
+&"DNC": SubResource("Animation_bl0uy"),
+&"RESET": SubResource("Animation_qikce")
+}
+
+[node name="Day night cycle" type="Control" unique_id=1713305108 node_paths=PackedStringArray("timer", "animation")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bp3rm")
+timer = NodePath("Timer")
+animation = NodePath("Animation")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=842457450]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 0.078431375)
+
+[node name="Timer" type="Timer" parent="." unique_id=72351106]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1668229409]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_eyeql")

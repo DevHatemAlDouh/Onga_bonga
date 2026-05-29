@@ -29,7 +29,8 @@ func Spawner():
 func _process(_delta: float) -> void:
 	if Enemy_spawner_list.get_children().size() == 0:
 		if Enemy_list.get_children().size() == 0:
-			Spawner()
+			if !GameManager.is_it_day_yeat():
+				Spawner()
 
 
 func _on_spawner_timer_timeout() -> void:

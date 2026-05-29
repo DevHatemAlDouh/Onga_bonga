@@ -4,11 +4,11 @@ var Can_attack := true
 @export var Speed : float
 @export var Attack_duration : Timer
 @export var animation : AnimationPlayer
-var Enemy:Vector2
+var Enemy:Node
 
 func _process(delta: float) -> void:
-	translate(Speed * to_local(Enemy) * delta)
-	if !Can_attack:
+	if !Can_attack and Enemy != null:
+		translate(Speed * to_local(Enemy.global_position) * delta)
 		if !animation.is_playing():
 			animation.play("Roling")
 

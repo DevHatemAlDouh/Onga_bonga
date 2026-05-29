@@ -25,13 +25,12 @@ var _multiplayer : bool
 var can_attack = true
 var Death = false
 
-
 func _enter_tree() -> void:
 	if _multiplayer:
 		set_multiplayer_authority(int(name))
 
 func _ready() -> void:
-	ping_timeout.timeout.connect(func():rpc("Ping"))
+	ping_timeout.timeout.connect(func():rpc("Ping",Time.get_ticks_msec()))
 	if is_multiplayer_authority():
 		camera_2d.make_current()
 	else:
@@ -39,9 +38,9 @@ func _ready() -> void:
 
 @rpc ("any_peer","call_local")
 
-func Ping():
+func Ping(sent_time):
 	ping_timeout.start()
-	#ping.text = "Ping: "+str(get_heartbeat_interval())+"ms"
+	ping.text = "Ping: "+str(Time.get_ticks_msec() - sent_time)+"ms"
 	
 
 func _physics_process(_delta: float) -> void:
@@ -82,6 +81,7 @@ func distance_formula(me:Vector2,target:Vector2):
 func makepath():
 	var Enemys = get_tree().get_nodes_in_group("Enemy")
 	var Nerast_enamy : Vector2 
+	var All_enemys :Dictionary[Node, Vector2] = {}
 	var shotrest_distance = 100000
 	if Enemys.size():
 		for i in Enemys.size():
@@ -90,12 +90,13 @@ func makepath():
 				show()
 				if shotrest_distance >= Enemy_distance:
 					Nerast_enamy = Enemys[i].global_position
+					All_enemys.get_or_add(Enemys[i],Nerast_enamy)
 					shotrest_distance = Enemy_distance
-	return Nerast_enamy
+	return All_enemys.find_key(Nerast_enamy)
 
 func Wapon():
 	var enemy = makepath()
-	if enemy != Vector2.ZERO:
+	if enemy != null:
 		var stone = Stone.instantiate()
 		get_tree().current_scene.add_child(stone)
 		stone.Attack(enemy)

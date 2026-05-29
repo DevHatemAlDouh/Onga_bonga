@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjyfs40uiptbo" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Script" uid="uid://dt2xrxrn812gc" path="res://Components/Scripts/hurtbox.gd" id="2_4ntmi"]
-[ext_resource type="Texture2D" uid="uid://cca0d1aqhltw4" path="res://Player/Design/Test 001.png" id="2_5htga"]
+[ext_resource type="Texture2D" uid="uid://bi0qg0wlsshcp" path="res://Player/Design/Test 002.png" id="2_5htga"]
 [ext_resource type="PackedScene" uid="uid://dxewwf8xymrh2" path="res://Components/UI/Health_bar.tscn" id="3_fhl08"]
 [ext_resource type="Script" uid="uid://tscn7y28rhmh" path="res://Components/Scripts/health.gd" id="3_gwnis"]
 [ext_resource type="Script" uid="uid://bhf6gsmednrk7" path="res://Components/Scripts/xp.gd" id="4_vtle1"]
@@ -12,22 +12,27 @@
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d4lxsq8nqdbfi" path="res://Components/UI/cope.png" id="13_gu6f8"]
+[ext_resource type="PackedScene" uid="uid://dqcjwf7l3wakh" path="res://Components/Scenes/day_night_cycle.tscn" id="13_p5o4e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
 atlas = ExtResource("2_5htga")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
 atlas = ExtResource("2_5htga")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
 atlas = ExtResource("2_5htga")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
 atlas = ExtResource("2_5htga")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("2_5htga")
+region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pisgm"]
 animations = [{
@@ -43,23 +48,28 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lfmf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pisgm")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5htga"]
-size = Vector2(16, 72)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b1ygp"]
+radius = 50.0
+height = 100.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k53q1"]
-size = Vector2(20, 76)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5htga"]
+radius = 55.0
+height = 110.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o28un"]
-radius = 62.94839
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5o4e"]
+radius = 250.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n471f"]
-radius = 61.400326
+radius = 250.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_apopc"]
 properties/0/path = NodePath(".:position")
@@ -89,7 +99,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hshwv"]
 resource_name = "move"
-length = 0.5
+length = 0.35
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,10 +108,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 0, 2, 3]
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpjlu"]
@@ -132,6 +142,7 @@ unique_name_in_owner = true
 position = Vector2(0, -11)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_pisgm")
+offset = Vector2(0, -40)
 
 [node name="Health" type="Node" parent="." unique_id=2141201883]
 script = ExtResource("3_gwnis")
@@ -144,8 +155,7 @@ max_xp = 20.0
 metadata/_custom_type_script = "uid://bhf6gsmednrk7"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1435220923]
-position = Vector2(-2, 9)
-shape = SubResource("RectangleShape2D_5htga")
+shape = SubResource("CapsuleShape2D_b1ygp")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1826649057 node_paths=PackedStringArray("health")]
 script = ExtResource("2_4ntmi")
@@ -153,8 +163,7 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1081034559]
-position = Vector2(-2, 7)
-shape = SubResource("RectangleShape2D_k53q1")
+shape = SubResource("CapsuleShape2D_5htga")
 
 [node name="Heling_items_detactor" type="Area2D" parent="." unique_id=1087238307 node_paths=PackedStringArray("health")]
 visible = false
@@ -163,8 +172,7 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bkn4hb54cnoa"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Heling_items_detactor" unique_id=1400937519]
-position = Vector2(0.5, 0.5)
-shape = SubResource("CircleShape2D_o28un")
+shape = SubResource("CircleShape2D_p5o4e")
 
 [node name="XP_detactor" type="Area2D" parent="." unique_id=71053386]
 visible = false
@@ -176,10 +184,11 @@ shape = SubResource("CircleShape2D_n471f")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=518811761]
 unique_name_in_owner = true
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.15, 0.15)
 
 [node name="Wapon" type="Marker2D" parent="." unique_id=2057725854]
 unique_name_in_owner = true
+position = Vector2(0, -300)
 
 [node name="Can attack" type="Timer" parent="." unique_id=1888641155]
 
@@ -361,6 +370,11 @@ text = "To main menu"
 icon = SubResource("CompressedTexture2D_p5o4e")
 flat = true
 icon_alignment = 2
+
+[node name="Day night cycle" parent="UI" unique_id=1713305108 instance=ExtResource("13_p5o4e")]
+day_time = 15
+nigth_time = 7
+metadata/_edit_use_anchors_ = true
 
 [node name="Ping_timeout" type="Timer" parent="." unique_id=1942584867]
 unique_name_in_owner = true
