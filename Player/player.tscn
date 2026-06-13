@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d4lxsq8nqdbfi" path="res://Components/UI/cope.png" id="13_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://dqcjwf7l3wakh" path="res://Components/Scenes/day_night_cycle.tscn" id="13_p5o4e"]
+[ext_resource type="PackedScene" uid="uid://cmbx0pbr48tgm" path="res://Components/Scenes/command.tscn" id="14_gu6f8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
 atlas = ExtResource("2_5htga")
@@ -126,7 +127,7 @@ load_path = "res://.godot/imported/Retry.png-a76a4d595fa644b3838b6b1bda123c2e.ct
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p5o4e"]
 load_path = "res://.godot/imported/Quit.png-9e40bb29d4adaaf8489cb552d05fbf87.ctex"
 
-[node name="Player" type="CharacterBody2D" unique_id=307889494 node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=307889494 node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up", "command") groups=["Player"]]
 z_index = 10
 collision_layer = 3
 collision_mask = 13
@@ -136,6 +137,7 @@ Can_attack = NodePath("Can attack")
 Death_screen = NodePath("UI/Death screen")
 Player_UI = NodePath("UI/Player UI")
 Can_level_up = NodePath("UI/Player UI/BoxContainer/Control/LevelUp2")
+command = NodePath("UI/Command")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=265857767]
 unique_name_in_owner = true
@@ -147,6 +149,7 @@ offset = Vector2(0, -40)
 [node name="Health" type="Node" parent="." unique_id=2141201883]
 script = ExtResource("3_gwnis")
 max_health = 10
+immortality = true
 metadata/_custom_type_script = "uid://tscn7y28rhmh"
 
 [node name="XP" type="Node" parent="." unique_id=487783865]
@@ -202,6 +205,9 @@ libraries/ = SubResource("AnimationLibrary_gpjlu")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1204922847]
 unique_name_in_owner = true
 
+[node name="Day night cycle" parent="UI" unique_id=1713305108 instance=ExtResource("13_p5o4e")]
+metadata/_edit_use_anchors_ = true
+
 [node name="Player UI" type="Control" parent="UI" unique_id=2030764488]
 layout_mode = 3
 anchors_preset = 15
@@ -237,6 +243,8 @@ visible = false
 layout_mode = 2
 texture = ExtResource("9_00tjw")
 expand_mode = 2
+
+[node name="Command" parent="UI" unique_id=664677310 instance=ExtResource("14_gu6f8")]
 
 [node name="Death screen" type="Control" parent="UI" unique_id=1666779860]
 visible = false
@@ -370,11 +378,6 @@ text = "To main menu"
 icon = SubResource("CompressedTexture2D_p5o4e")
 flat = true
 icon_alignment = 2
-
-[node name="Day night cycle" parent="UI" unique_id=1713305108 instance=ExtResource("13_p5o4e")]
-day_time = 15
-nigth_time = 7
-metadata/_edit_use_anchors_ = true
 
 [node name="Ping_timeout" type="Timer" parent="." unique_id=1942584867]
 unique_name_in_owner = true

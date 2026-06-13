@@ -19,6 +19,7 @@ extends CharacterBody2D
 @export var Death_screen : Control
 @export var Player_UI : Control
 @export var Can_level_up : TextureRect
+@export var command: Control
 
 var SPEED = 500.0
 var _multiplayer : bool 
@@ -49,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 			lobby_info.show()
 			lobby_id.text = "Lobby Id: "+str(NetworkHandler.tube_client.session_id)
 			copy_lobby_id.pressed.connect(func(): DisplayServer.clipboard_set(NetworkHandler.tube_client.session_id))
-		if Input.is_action_just_pressed("Settings"):
+		if Input.is_action_just_pressed("Settings") && !command.show_input:
 			settings.visible = !settings.visible
 			Engine.time_scale = !settings.visible
 		if can_attack:
@@ -59,7 +60,8 @@ func _physics_process(_delta: float) -> void:
 				can_attack = false
 		if _multiplayer and !NetworkHandler.tube_enabed:
 			if !is_multiplayer_authority():return
-		velocity = Input.get_vector("Left", "Right","Top", "Down").normalized() * SPEED
+		if !command.show_input:
+			velocity = Input.get_vector("Left", "Right","Top", "Down").normalized() * SPEED
 		_animation()
 		move_and_slide()
 
