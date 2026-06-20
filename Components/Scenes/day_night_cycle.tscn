@@ -62,7 +62,6 @@ color = Color(0, 0, 0, 0.078431375)
 [node name="Timer" type="Timer" parent="." unique_id=72351106]
 unique_name_in_owner = true
 one_shot = true
-autostart = true
 
 [node name="Animation" type="AnimationPlayer" parent="." unique_id=1668229409]
 unique_name_in_owner = true

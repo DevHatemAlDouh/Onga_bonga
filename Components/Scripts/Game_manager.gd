@@ -37,7 +37,7 @@ enum _Cycle {
 	Night
 }
 
-var Day_night_cycle = _Cycle.Night
+var Day_night_cycle = _Cycle.Day
 
 
 func is_it_day_yeat():

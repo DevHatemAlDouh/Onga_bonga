@@ -12,8 +12,10 @@ extends CharacterBody2D
 @onready var lobby_info: HBoxContainer = %"Lobby info"
 @onready var ping: Label = %Ping
 @onready var ping_timeout: Timer = %Ping_timeout
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
-@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
+@onready var body: AnimatedSprite2D = %body
+@onready var legs: AnimatedSprite2D = %legs
+@onready var animation_tree: AnimationTree = %AnimationTree
+
 
 @export var Can_attack: Timer
 @export var Death_screen : Control
@@ -25,6 +27,8 @@ var SPEED = 500.0
 var _multiplayer : bool 
 var can_attack = true
 var Death = false
+var is_moving = false
+var is_attack = false
 
 func _enter_tree() -> void:
 	if _multiplayer:
@@ -43,6 +47,12 @@ func Ping(sent_time):
 	ping_timeout.start()
 	ping.text = "Ping: "+str(Time.get_ticks_msec() - sent_time)+"ms"
 	
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("Attack"):
+		is_attack = true
+	elif Input.is_action_just_released("Attack"):
+		is_attack = false
 
 func _physics_process(_delta: float) -> void:
 	if !Death:
@@ -67,14 +77,25 @@ func _physics_process(_delta: float) -> void:
 
 func _animation():
 	if velocity != Vector2.ZERO:
-		if !animation_player.is_playing():
-				animation_player.play("move")
-		if velocity.x > 0:
-			animated_sprite_2d.flip_h = false
-		elif velocity.x < 0:
-			animated_sprite_2d.flip_h = true
+		is_moving = true 
 	else:
-		animation_player.play("RESET")
+		is_moving = false
+	if is_attack:
+		animation_tree["parameters/wapon/attack-transition/transition_request"] = "swing"
+	else:
+		animation_tree["parameters/wapon/attack-transition/transition_request"] = "swing-backward"
+
+
+	animation_tree["parameters/move/blend_amount"] = is_moving
+	animation_tree["parameters/attack/blend_amount"] = is_attack
+	animation_tree["parameters/run/legs/blend_position"] = velocity
+	animation_tree["parameters/run/body/blend_position"] = velocity
+	animation_tree["parameters/idel/legs/blend_position"] = velocity
+	animation_tree["parameters/idel/body/blend_position"] = velocity
+	animation_tree["parameters/wapon/swing/blend_position"] = velocity
+	animation_tree["parameters/wapon/swing-backward/blend_position"] = velocity
+	
+
 
 func distance_formula(me:Vector2,target:Vector2):
 	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
@@ -111,7 +132,7 @@ func _on_can_attack_timeout() -> void:
 func death():
 	Death = true 
 	Death_screen.visible = Death
-	animation_player.play("RESET")
+	#animation_player.play("RESET")
 	if !_multiplayer:
 		Engine.time_scale = 0
 
