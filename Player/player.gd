@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var Stone = preload("uid://8hh3mh3k5e4n")
+@onready var Scythe = preload("uid://dpx6sxbrn7p1h")
 @onready var wapon: Marker2D = %Wapon
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var ui: CanvasLayer = %UI
@@ -15,7 +16,6 @@ extends CharacterBody2D
 @onready var body: AnimatedSprite2D = %body
 @onready var legs: AnimatedSprite2D = %legs
 @onready var animation_tree: AnimationTree = %AnimationTree
-
 
 @export var Can_attack: Timer
 @export var Death_screen : Control
@@ -48,8 +48,9 @@ func Ping(sent_time):
 	ping.text = "Ping: "+str(Time.get_ticks_msec() - sent_time)+"ms"
 	
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("Attack"):
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_pressed("Attack") && !is_attack:
+		Wapon_scythe()
 		is_attack = true
 	elif Input.is_action_just_released("Attack"):
 		is_attack = false
@@ -63,11 +64,6 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_action_just_pressed("Settings") && !command.show_input:
 			settings.visible = !settings.visible
 			Engine.time_scale = !settings.visible
-		if can_attack:
-			var new_wapon = Wapon()
-			if new_wapon:
-				Can_attack.start(new_wapon)
-				can_attack = false
 		if _multiplayer and !NetworkHandler.tube_enabed:
 			if !is_multiplayer_authority():return
 		if !command.show_input:
@@ -98,8 +94,7 @@ func _animation():
 
 
 func distance_formula(me:Vector2,target:Vector2):
-	var distance = sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
-	return distance
+	return sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
 
 func makepath():
 	var Enemys = get_tree().get_nodes_in_group("Enemy")
@@ -117,7 +112,7 @@ func makepath():
 					shotrest_distance = Enemy_distance
 	return All_enemys.find_key(Nerast_enamy)
 
-func Wapon():
+func Wapon_stone():
 	var enemy = makepath()
 	if enemy != null:
 		var stone = Stone.instantiate()
@@ -125,6 +120,14 @@ func Wapon():
 		stone.Attack(enemy)
 		stone.global_position = wapon.global_position
 		return stone.get_attack_speed()
+
+func Wapon_scythe():
+	if GameManager.wapons["scyth"]["scyths"] > 0:
+		var scythe = Scythe.instantiate()
+		get_tree().current_scene.add_child(scythe)
+		scythe.Attack(self,get_global_mouse_position())
+		scythe.global_position = wapon.global_position
+		GameManager.wapons["scyth"]["scyths"] -= 1
 
 func _on_can_attack_timeout() -> void:
 	can_attack = true

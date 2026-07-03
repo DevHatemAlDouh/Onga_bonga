@@ -519,7 +519,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [4]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -827,7 +827,6 @@ nodes/swing/position = Vector2(-210, 50)
 node_connections = [&"output", 0, &"attack-transition", &"attack-transition", 0, &"swing", &"attack-transition", 1, &"swing-backward"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_r6ubc"]
-graph_offset = Vector2(-512.0656, 35.53813)
 nodes/attack/node = SubResource("AnimationNodeBlend2_dkpta")
 nodes/attack/position = Vector2(60, 140)
 nodes/move/node = SubResource("AnimationNodeBlend2_76lrf")
@@ -860,10 +859,13 @@ command = NodePath("UI/Command")
 
 [node name="body" type="AnimatedSprite2D" parent="." unique_id=265857767]
 unique_name_in_owner = true
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_pisgm")
+frame = 4
 
 [node name="legs" type="AnimatedSprite2D" parent="." unique_id=1116223939]
 unique_name_in_owner = true
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_njsjv")
 flip_h = true
 
@@ -908,10 +910,12 @@ shape = SubResource("CircleShape2D_n471f")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=518811761]
 unique_name_in_owner = true
+zoom = Vector2(0.5, 0.5)
 
-[node name="Wapon" type="Marker2D" parent="." unique_id=2057725854]
+[node name="Wapons" type="Node2D" parent="." unique_id=2014128231]
+
+[node name="Wapon" type="Marker2D" parent="Wapons" unique_id=2057725854]
 unique_name_in_owner = true
-position = Vector2(0, -300)
 
 [node name="Can attack" type="Timer" parent="." unique_id=1888641155]
 
@@ -943,7 +947,6 @@ parameters/wapon/swing/blend_position = Vector2(0, 0)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1204922847]
 unique_name_in_owner = true
-visible = false
 
 [node name="Day night cycle" parent="UI" unique_id=1713305108 instance=ExtResource("13_p5o4e")]
 metadata/_edit_use_anchors_ = true

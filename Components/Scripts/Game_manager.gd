@@ -2,6 +2,14 @@ extends Node
 
 var players = {}
 
+var wapons = {
+	"scyth":{
+		"base_damage" : 7
+		,"range": 250
+		,"scyths": 1
+	}
+}
+
 var _day_time: int = 20 #sec
 var _nigth_time: int = 8 #sec
 var _time_progres: bool = true

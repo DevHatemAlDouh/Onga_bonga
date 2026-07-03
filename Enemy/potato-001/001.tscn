@@ -58,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piarl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -124,7 +124,6 @@ animation = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1909704146]
 position = Vector2(0, -1.49012e-06)
-scale = Vector2(2.8125, 2.8125)
 sprite_frames = SubResource("SpriteFrames_wd5rk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641270617]
