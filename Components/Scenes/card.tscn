@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://derukomogf7bf"]
+
+[ext_resource type="Script" uid="uid://d306rg78wu8to" path="res://Components/Scripts/card.gd" id="1_g2myr"]
+[ext_resource type="Texture2D" uid="uid://cpw1cjm44xsvo" path="res://Components/UI/Card.png" id="2_h4klj"]
+[ext_resource type="Texture2D" uid="uid://c814ue1pco1if" path="res://Components/UI/Icons.png" id="3_h4klj"]
+
+[sub_resource type="Animation" id="Animation_tvsk8"]
+resource_name = "Flip"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Card:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.47),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_content:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("card_content:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.47),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rafpc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Card:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_content:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("card_content:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oq17v"]
+_data = {
+&"Flip": SubResource("Animation_tvsk8"),
+&"RESET": SubResource("Animation_rafpc")
+}
+
+[node name="Card" type="Node2D" unique_id=1601586609]
+script = ExtResource("1_g2myr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1760498506]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_oq17v")
+
+[node name="Card" type="Sprite2D" parent="." unique_id=2093295983]
+texture = ExtResource("2_h4klj")
+hframes = 2
+
+[node name="card_content" type="Node2D" parent="." unique_id=1937367077]
+visible = false
+
+[node name="Icon" type="Sprite2D" parent="card_content" unique_id=708310401]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+texture = ExtResource("3_h4klj")
+hframes = 6
+
+[node name="Detals" type="Label" parent="card_content" unique_id=1933328854]
+unique_name_in_owner = true
+offset_left = -24.0
+offset_top = -7.0
+offset_right = 24.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0.26523042, 0.953125, 0.19732666, 1)
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 5
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="card_content" unique_id=119013252]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+offset_left = -24.0
+offset_top = 17.0
+offset_right = 24.0
+offset_bottom = 31.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=627918243]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="Button" type="Button" parent="." unique_id=1772150240]
+modulate = Color(1, 1, 1, 0)
+offset_left = -24.0
+offset_top = -31.0
+offset_right = 24.0
+offset_bottom = 31.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

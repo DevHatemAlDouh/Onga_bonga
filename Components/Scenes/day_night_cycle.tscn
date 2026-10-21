@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dqcjwf7l3wakh"]
 
 [ext_resource type="Script" uid="uid://6v84oqxqkvn8" path="res://Components/Scripts/Day_night_cycle.gd" id="1_bp3rm"]
+[ext_resource type="Texture2D" uid="uid://ci31gqgf6ukq" path="res://Components/UI/Day_nigth.png" id="2_buceg"]
 
 [sub_resource type="Animation" id="Animation_bl0uy"]
 resource_name = "DNC"
@@ -38,7 +39,7 @@ _data = {
 &"RESET": SubResource("Animation_qikce")
 }
 
-[node name="Day night cycle" type="Control" unique_id=1713305108 node_paths=PackedStringArray("timer", "animation")]
+[node name="Day night cycle" type="Control" unique_id=1713305108]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,10 +47,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bp3rm")
-timer = NodePath("Timer")
-animation = NodePath("Animation")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=842457450]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,10 +59,32 @@ grow_vertical = 2
 size_flags_horizontal = 4
 color = Color(0, 0, 0, 0.078431375)
 
-[node name="Timer" type="Timer" parent="." unique_id=72351106]
-unique_name_in_owner = true
-one_shot = true
-
 [node name="Animation" type="AnimationPlayer" parent="." unique_id=1668229409]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_eyeql")
+
+[node name="Control" type="Control" parent="." unique_id=1183137546]
+top_level = true
+clip_children = 2
+clip_contents = true
+anchors_preset = 0
+offset_left = 410.0
+offset_top = 5.0
+offset_right = 474.0
+offset_bottom = 37.0
+
+[node name="DayNigth2" type="Sprite2D" parent="Control" unique_id=498640591]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+texture = ExtResource("2_buceg")
+flip_v = true
+hframes = 2
+
+[node name="DayNigth" type="Sprite2D" parent="Control" unique_id=181177854]
+top_level = true
+z_index = 10
+position = Vector2(442, 21)
+texture = ExtResource("2_buceg")
+hframes = 2
+vframes = 2
+frame = 1

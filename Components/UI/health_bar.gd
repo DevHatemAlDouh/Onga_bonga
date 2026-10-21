@@ -19,6 +19,7 @@ func _ready() -> void:
 	value = HP.get_max_health()
 	damage_bar.max_value = HP.get_max_health()
 	damage_bar.value = HP.get_max_health()
+	GameManager.player_info["info"]["max_hp"] = max_value
 
 
 func _on_timer_timeout() -> void:

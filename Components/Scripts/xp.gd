@@ -12,6 +12,7 @@ signal level_up
 
 func set_max_xp(value: float):
 	max_xp = value
+	GameManager.player_info["xp"]["max_xp"] = max_xp
 	max_xp_changed.emit(max_xp)
 
 func get_max_xp() -> float:
@@ -22,12 +23,14 @@ func set_xp(value: float):
 		xp += value
 		if xp >= get_max_xp():
 			xp -= get_max_xp()
-			Livel_up()
+			Level_up()
+		GameManager.player_info["xp"]["current_xp"] = xp
 		xp_changed.emit(xp)
 
 func get_xp() -> float:
 	return xp
 
-func Livel_up():
+func Level_up():
 	level_up.emit()
+	GameManager.player_info["level"] += 1 
 	set_max_xp(get_max_xp()+(get_max_xp()/10))

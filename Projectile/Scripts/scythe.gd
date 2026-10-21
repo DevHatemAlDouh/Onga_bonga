@@ -15,28 +15,15 @@ var Target_two
 func _ready() -> void:
 	get_back.timeout.connect(go_back)
 	timer.timeout.connect(go_back)
-	hit_box.set_damage(GameManager.wapons["scyth"]["base_damage"])
+	hit_box.set_damage(GameManager.wapons["scyth"]["base_damage"] + GameManager.player_info["info"]["attack_damege"])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	swith_state()
+	if !animation_player.is_playing():
+		animation_player.play("move")
 	Move(delta)
 
-
-func swith_state():
-	if State == Status.idel:
-		animation_player.speed_scale = 1
-		animation_player.play("RESET")
-	elif State == Status.feaz_one:
-		animation_player.speed_scale = 4
-		animation_player.play("move")
-	elif State == Status.in_zone:
-		animation_player.speed_scale = 7
-		animation_player.play("move")
-	elif State == Status.feaz_two:
-		animation_player.speed_scale = 10
-		animation_player.play_backwards("move")
 
 func Attack(playeer,targer_pos):
 	get_back.start()

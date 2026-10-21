@@ -31,6 +31,9 @@ func makepath():
 					shotrest_distance = Distance
 	return Nerast
 
+func set_xp(value):
+	Xp = value
+
 func get_xp() -> int:
 	return Xp
 

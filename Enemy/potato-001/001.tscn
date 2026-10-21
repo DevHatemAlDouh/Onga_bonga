@@ -64,13 +64,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0arr3"]
-radius = 44.285713
+radius = 15.971913
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1ogv"]
-radius = 45.7366
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g1ypo"]
-radius = 47.1429
+radius = 15.714285
 
 [sub_resource type="Animation" id="Animation_a1ogv"]
 resource_name = "Move"

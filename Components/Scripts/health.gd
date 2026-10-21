@@ -30,9 +30,7 @@ func set_health(value: int):
 	if value != 0:
 		if value < health and immortality:
 			return
-
 		var clamped_value = clampi(value, 0, max_health)
-
 		if clamped_value != health:
 			var diffrence = clamped_value - health
 			health = value
