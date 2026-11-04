@@ -58,15 +58,15 @@ func Command():
 	if !msg.is_empty():
 		var msg_info = msg.to_lower().split(" ")
 		if msg_info[0] == "/help": # help commands
-			messages.text += str("set -> change the time and day nigth cycle\n")
+			messages.text += str("set -> change the time and day night cycle\n")
 			if msg_info.size() > 1 && msg_info[1] == "set": # set timer
-				messages.text += str("time -> change the time and day nigth cycle\n")
+				messages.text += str("time -> change the time and day night cycle\n")
 				if msg_info.size() > 2 && msg_info[2] == "time": # set timer
 					messages.text += str("""
-					stop -> stop day nigth cycle from prograsing\n
-					start -> cantnue day nigth cycle progras\n
-					day -> change day nigth cycle to day\n
-					night -> change day nigth cycle to nigth\n
+					stop -> stop day night cycle from prograsing\n
+					start -> cantnue day night cycle progras\n
+					day -> change day night cycle to day\n
+					night -> change day night cycle to night\n
 					""")
 					show_input = false
 			messages.text += str("give -> add to the player\n")
@@ -76,24 +76,30 @@ func Command():
 		if msg_info[0] == "/set": # set commands
 ################################################################################
 			if msg_info.size() > 1 && msg_info[1] == "time": # set timer
-				if msg_info.size() > 2 && msg_info[2] == "stop": # set stop day nigth cycle
+				if msg_info.size() > 2 && msg_info[2] == "stop": # set stop day night cycle
 					GameManager.set_time_progres(false)
 					messages.text += str("time stoped\n")
 					show_input = false
-				if msg_info.size() > 2 && msg_info[2] == "start": # set start day nigth cycle
+				if msg_info.size() > 2 && msg_info[2] == "start": # set start day night cycle
 					GameManager.set_time_progres(true)
 					messages.text += str("time start\n")
 					show_input = false
-				if msg_info.size() > 2 && msg_info[2] == "day": # set day nigth cycle to day
+				if msg_info.size() > 2 && msg_info[2] == "day": # set day night cycle to day
 					GameManager.set_day()
 					GameManager.set_tiker_day()
 					messages.text += str("set time day\n")
 					show_input = false
-				if msg_info.size() > 2 && msg_info[2] == "nigth": # set day nigth cycle to nigth
-					GameManager.set_nigth()
-					GameManager.set_tiket_nigth()
-					messages.text += str("set time nigth\n")
+				if msg_info.size() > 2 && msg_info[2] == "night": # set day night cycle to night
+					GameManager.set_night()
+					GameManager.set_tiket_night()
+					messages.text += str("set time night\n")
 					show_input = false
+			line_edit.clear()
+		elif msg_info[0] == "/debug": # dev test commands 
+################################################################################
+			GameManager.set_time_progres(false)
+			GameManager.set_time_progres(true)
+			show_input = false
 			line_edit.clear()
 			#The give command have tichncal issues
 		#elif msg_info[0] == "/give": # give commands 

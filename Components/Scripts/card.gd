@@ -9,6 +9,8 @@ extends Node2D
 var max_width = 17
 var text
 var RNG:int
+var old_value
+var new_value
 signal clicked
 
 func run(num):
@@ -17,8 +19,10 @@ func run(num):
 	
 	display_text(str(GameManager.player_info["description"][GameManager.abilities[RNG]])+str(GameManager.player_info["abilities"]["lavel_scaling"][GameManager.player_info["abilities"][GameManager.abilities[RNG]]])+"%")
 	
-	var old_value = + GameManager.player_info["info"][GameManager.abilities[RNG]]
-	var new_value = old_value + (old_value * GameManager.player_info["abilities"]["lavel_scaling"][GameManager.player_info["abilities"][GameManager.abilities[RNG]]]/100)
+	old_value = GameManager.player_info["info"][GameManager.abilities[RNG]]
+	new_value = old_value + (old_value * GameManager.player_info["abilities"]["lavel_scaling"][GameManager.player_info["abilities"][GameManager.abilities[RNG]]]/100)
+	if old_value == new_value:
+		new_value += 1
 	label.text =  str(old_value) +" >>> [color=0f0]"+ str(new_value)
 
 func display_text(text_to_display:String):
@@ -40,5 +44,6 @@ func _on_timer_timeout() -> void:
 
 
 func _on_button_pressed() -> void:
-	GameManager.player_info["abilities"][GameManager.abilities[RNG]] +=1
+	GameManager.player_info["info"][GameManager.abilities[RNG]] = new_value
+	GameManager.player_info["abilities"][GameManager.abilities[RNG]] += 1
 	clicked.emit()

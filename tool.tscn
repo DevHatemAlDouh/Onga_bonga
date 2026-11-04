@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dgig8fogcqgyv"]
+
+[ext_resource type="Script" uid="uid://dlqhn2qhujs8v" path="res://Components/Scripts/tool.gd" id="1_n5j8b"]
+[ext_resource type="Texture2D" uid="uid://u5idnl1p3l2p" path="res://Components/UI/defoult.png" id="2_3gk12"]
+
+[node name="Tool" type="Control" unique_id=1565656285]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -448.0
+offset_bottom = -238.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n5j8b")
+
+[node name="Tools" type="Sprite2D" parent="." unique_id=1299599025]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+texture = ExtResource("2_3gk12")
+
+[node name="Control" type="Control" parent="." unique_id=1506416167]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=992023409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Action" type="Sprite2D" parent="." unique_id=1916734204]
+unique_name_in_owner = true
+position = Vector2(28, 26)
+texture = ExtResource("2_3gk12")
+
+[node name="Total_usege" type="Label" parent="." unique_id=1025754851]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = -2.0
+offset_right = 37.0
+offset_bottom = 10.0
+theme_override_font_sizes/font_size = 8
+text = "50"

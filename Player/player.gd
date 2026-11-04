@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var Stone = preload("uid://8hh3mh3k5e4n")
 @onready var Card = preload("uid://derukomogf7bf")
 @onready var Scythe = preload("uid://dpx6sxbrn7p1h")
-@onready var wapon: Marker2D = %Wapon
+@onready var weapon: Marker2D = %Weapon
 @onready var camera_2d: Camera2D = %Camera2D
 @onready var ui: CanvasLayer = %UI
 @onready var settings: Control = %Settings
@@ -16,21 +16,25 @@ extends CharacterBody2D
 @onready var ping_timeout: Timer = %Ping_timeout
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var cards: Control = %Cards
+@onready var hoe_hit_box: HitBox = %HitBox
 
-@export var Can_attack: Timer
 @export var Death_screen : Control
 @export var Player_UI : Control
 @export var Can_level_up : TextureRect
 @export var command: Control
+@export var base_attack = 5
 
 var SPEED = 500.0
-var base_attack = 5
 var _multiplayer : bool 
-var can_attack = true
 var Death = false
 var is_moving = false
+
+
 var is_using_scythe = false
+
 var is_using_hoe = false
+
+
 var live_cards = []
 
 func _enter_tree() -> void:
@@ -54,19 +58,20 @@ func Ping(sent_time):
 	
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Attack 1") && can_attack:
-		$hoe2/HitBox.set_damage(GameManager.player_info["info"]["attack_damege"])
-		is_using_hoe = true
-		can_attack = false
-		Can_attack.start()
-	elif event.is_action_released("Attack 1"):
-		is_using_hoe = false
-	
-	if event.is_action_pressed("Attack 2") && !is_using_scythe:
-		Wapon_scythe()
-		is_using_scythe = true
-	elif event.is_action_released("Attack 2"):
-		is_using_scythe = false
+	if !settings.visible && Death:
+		if event.is_action_pressed("Attack 1") && !is_using_hoe && GameManager.weapons["hoe"]["can_use"]:
+			GameManager.weapons["hoe"]["base_damage"] = hoe_hit_box.get_damage()
+			hoe_hit_box.set_damage(GameManager.weapons["hoe"]["base_damage"] + GameManager.player_info["info"]["attack_damege"])
+			is_using_hoe = true
+			cooldown("hoe")
+		elif event.is_action_released("Attack 1"):
+			is_using_hoe = false
+		
+		if event.is_action_pressed("Attack 2") && !is_using_scythe:
+			weapon_scythe()
+			is_using_scythe = true
+		elif event.is_action_released("Attack 2"):
+			is_using_scythe = false
 
 func _physics_process(_delta: float) -> void:
 	if !Death:
@@ -77,6 +82,7 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_action_just_pressed("Settings") && !command.show_input:
 			settings.visible = !settings.visible
 			Engine.time_scale = !settings.visible
+			GameManager.set_time_progres(!settings.visible)
 		if _multiplayer and !NetworkHandler.tube_enabed:
 			if !is_multiplayer_authority():return
 		if !command.show_input:
@@ -90,9 +96,9 @@ func _animation():
 	else:
 		is_moving = false
 	if is_using_scythe:
-		animation_tree["parameters/wapon/attack-transition/transition_request"] = "swing"
+		animation_tree["parameters/weapon/attack-transition/transition_request"] = "swing"
 	else:
-		animation_tree["parameters/wapon/attack-transition/transition_request"] = "swing-backward"
+		animation_tree["parameters/weapon/attack-transition/transition_request"] = "swing-backward"
 	if is_using_hoe:
 		animation_tree["parameters/Add/add_amount"] = is_using_hoe
 	else:
@@ -107,10 +113,9 @@ func _animation():
 		animation_tree["parameters/run/body/blend_position"] = velocity
 		animation_tree["parameters/idel/legs/blend_position"] = velocity
 		animation_tree["parameters/idel/body/blend_position"] = velocity
-		animation_tree["parameters/wapon/swing/blend_position"] = velocity
-		animation_tree["parameters/wapon/swing-backward/blend_position"] = velocity
+		animation_tree["parameters/weapon/swing/blend_position"] = velocity
+		animation_tree["parameters/weapon/swing-backward/blend_position"] = velocity
 	
-
 
 func distance_formula(me:Vector2,target:Vector2):
 	return sqrt((me.x - target.x)**2 + (me.y - target.y)**2)
@@ -131,32 +136,30 @@ func makepath():
 					shotrest_distance = Enemy_distance
 	return All_enemys.find_key(Nerast_enamy)
 
-func Wapon_stone():
+func weapon_stone():
 	var enemy = makepath()
 	if enemy != null:
 		var stone = Stone.instantiate()
 		get_tree().current_scene.add_child(stone)
 		stone.Attack(enemy)
-		stone.global_position = wapon.global_position
+		stone.global_position = weapon.global_position
 		return stone.get_attack_speed()
 
-func Wapon_scythe():
-	if GameManager.wapons["scyth"]["scyths"] > 0:
+func weapon_scythe():
+	if GameManager.weapons["scythe"]["total_usage"] > 0:
 		var scythe = Scythe.instantiate()
 		get_tree().current_scene.add_child(scythe)
 		scythe.Attack(self,get_global_mouse_position())
-		scythe.global_position = wapon.global_position
-		GameManager.wapons["scyth"]["scyths"] -= 1
+		scythe.global_position = weapon.global_position
+		GameManager.weapons["scythe"]["total_usage"] -= 1
 
-func _on_can_attack_timeout() -> void:
-	can_attack = true
 
 func death():
 	Death = true 
 	Death_screen.visible = Death
 	if !_multiplayer:
+		GameManager.set_time_progres(false)
 		Engine.time_scale = 0
-
 
 
 func _on_health_health_depleted() -> void:
@@ -186,17 +189,26 @@ func _on_xp_level_up() -> void:
 	Can_level_up.visible = true
 
 func delete_cards():
-	print(live_cards)
 	for i in live_cards:
 		i.queue_free()
+	Can_level_up.visible = false
 	live_cards.clear()
 
-func _on_replay_pressed() -> void:
+func _replay() -> void:
 	if _multiplayer:
 		leave.disabled = true
 		retry.disabled = true
 		NetworkHandler.leave_server()
 	else:
 		if !is_multiplayer_authority():return
+		GameManager.set_time_progres(true)
+		GameManager.set_day()
+		GameManager.set_tiker_day()
 		Engine.time_scale = 1
 	get_tree().reload_current_scene()
+
+
+func cooldown(toolname:String): 
+	GameManager.weapons[toolname]["can_use"] = false
+	GameManager.weapons[toolname]["cooldown_start_at"] = GameManager.get_tiker()
+	

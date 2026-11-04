@@ -30,7 +30,6 @@ func _process(_delta: float) -> void:
 	if Enemy_spawner_list.get_children().size() == 0:
 		if Enemy_list.get_children().size() == 0:
 			if !GameManager.is_it_day_yeat():
-				pass
 				Spawner()
 
 

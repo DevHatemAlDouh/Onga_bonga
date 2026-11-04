@@ -12,10 +12,14 @@
 [ext_resource type="Script" uid="uid://o0og1idrbini" path="res://Components/Scripts/hitbox.gd" id="6_lfmf2"]
 [ext_resource type="PackedScene" uid="uid://ctn212h2ip38q" path="res://Components/Scenes/xp_bar.tscn" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://dfug04058jh51" path="res://Components/UI/Level up.png" id="9_00tjw"]
+[ext_resource type="PackedScene" uid="uid://cdaaaqsyqxjsn" path="res://Components/tiker.tscn" id="10_pisgm"]
 [ext_resource type="Texture2D" uid="uid://c3gsucmr0sq4f" path="res://Components/UI/Game over.png" id="10_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d4lxsq8nqdbfi" path="res://Components/UI/cope.png" id="13_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://dqcjwf7l3wakh" path="res://Components/Scenes/day_night_cycle.tscn" id="13_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://cmbx0pbr48tgm" path="res://Components/Scenes/command.tscn" id="14_gu6f8"]
+[ext_resource type="PackedScene" uid="uid://dgig8fogcqgyv" path="res://tool.tscn" id="18_o28un"]
+[ext_resource type="Texture2D" uid="uid://c14ialjljnylo" path="res://Components/UI/Tools.png" id="19_n471f"]
+[ext_resource type="Texture2D" uid="uid://c814ue1pco1if" path="res://Components/UI/Icons.png" id="20_n471f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
 atlas = ExtResource("2_dkpta")
@@ -517,7 +521,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hoe:frame")
+tracks/3/path = NodePath("hoe_icon:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -529,7 +533,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hoe:visible")
+tracks/4/path = NodePath("hoe_icon:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -541,7 +545,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("hoe2/HitBox/CollisionShape2D:disabled")
+tracks/5/path = NodePath("hoe/HitBox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -553,7 +557,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("hoe:rotation")
+tracks/6/path = NodePath("hoe_icon:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -565,7 +569,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("hoe2/HitBox/CollisionShape2D:position")
+tracks/7/path = NodePath("hoe/HitBox/CollisionShape2D:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -692,7 +696,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hoe:frame")
+tracks/0/path = NodePath("hoe_icon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -704,7 +708,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hoe:visible")
+tracks/1/path = NodePath("hoe_icon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -716,7 +720,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("hoe2/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("hoe/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -728,7 +732,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hoe2/HitBox/CollisionShape2D:position")
+tracks/3/path = NodePath("hoe/HitBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -740,7 +744,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hoe:rotation")
+tracks/4/path = NodePath("hoe_icon:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -757,7 +761,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hoe:frame")
+tracks/0/path = NodePath("hoe_icon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -769,7 +773,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hoe:visible")
+tracks/1/path = NodePath("hoe_icon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -781,7 +785,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("hoe2/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("hoe/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -793,7 +797,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hoe2/HitBox/CollisionShape2D:position")
+tracks/3/path = NodePath("hoe/HitBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -805,7 +809,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hoe:rotation")
+tracks/4/path = NodePath("hoe_icon:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -822,7 +826,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hoe:frame")
+tracks/0/path = NodePath("hoe_icon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -834,7 +838,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hoe:visible")
+tracks/1/path = NodePath("hoe_icon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -846,7 +850,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("hoe2/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("hoe/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -858,7 +862,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hoe2/HitBox/CollisionShape2D:position")
+tracks/3/path = NodePath("hoe/HitBox/CollisionShape2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -870,7 +874,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hoe:rotation")
+tracks/4/path = NodePath("hoe_icon:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -887,7 +891,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("hoe:frame")
+tracks/0/path = NodePath("hoe_icon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -899,7 +903,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("hoe:visible")
+tracks/1/path = NodePath("hoe_icon:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -911,7 +915,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("hoe2/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("hoe/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -923,7 +927,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("hoe:rotation")
+tracks/3/path = NodePath("hoe_icon:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -935,7 +939,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("hoe2/HitBox/CollisionShape2D:position")
+tracks/4/path = NodePath("hoe/HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -1203,7 +1207,7 @@ blend_point_3/pos = Vector2(0, 1)
 blend_point_3/name = &"Attack-down"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1l10g"]
-graph_offset = Vector2(-416.75616, 33.50389)
+graph_offset = Vector2(-341.25616, 25.503891)
 nodes/attack-transition/node = SubResource("AnimationNodeTransition_c6x0f")
 nodes/attack-transition/position = Vector2(60, 140)
 nodes/swing-backward/node = SubResource("AnimationNodeBlendSpace2D_8ynux")
@@ -1213,6 +1217,7 @@ nodes/swing/position = Vector2(-210, 50)
 node_connections = [&"output", 0, &"attack-transition", &"attack-transition", 0, &"swing", &"attack-transition", 1, &"swing-backward"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_r6ubc"]
+graph_offset = Vector2(-341.8098, 136.68231)
 nodes/output/position = Vector2(610, 120)
 nodes/attack/node = SubResource("AnimationNodeBlend2_dkpta")
 nodes/attack/position = Vector2(60, 140)
@@ -1222,13 +1227,13 @@ nodes/idel/node = SubResource("AnimationNodeBlendTree_sm0op")
 nodes/idel/position = Vector2(-400, 130)
 nodes/run/node = SubResource("AnimationNodeBlendTree_j2n6q")
 nodes/run/position = Vector2(-400, 290)
-nodes/wapon/node = SubResource("AnimationNodeBlendTree_1l10g")
-nodes/wapon/position = Vector2(-190, 430)
+nodes/weapon/node = SubResource("AnimationNodeBlendTree_1l10g")
+nodes/weapon/position = Vector2(-190, 430)
 nodes/hoe/node = SubResource("AnimationNodeBlendSpace2D_jp1hh")
 nodes/hoe/position = Vector2(70, 410)
 nodes/Add/node = SubResource("AnimationNodeAdd2_pisgm")
 nodes/Add/position = Vector2(390, 110)
-node_connections = [&"output", 0, &"Add", &"attack", 0, &"move", &"attack", 1, &"wapon", &"move", 0, &"idel", &"move", 1, &"run", &"Add", 0, &"attack", &"Add", 1, &"hoe"]
+node_connections = [&"output", 0, &"Add", &"attack", 0, &"move", &"attack", 1, &"weapon", &"move", 0, &"idel", &"move", 1, &"run", &"Add", 0, &"attack", &"Add", 1, &"hoe"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5htga"]
 load_path = "res://.godot/imported/Retry.png-a76a4d595fa644b3838b6b1bda123c2e.ctex"
@@ -1236,13 +1241,12 @@ load_path = "res://.godot/imported/Retry.png-a76a4d595fa644b3838b6b1bda123c2e.ct
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p5o4e"]
 load_path = "res://.godot/imported/Quit.png-9e40bb29d4adaaf8489cb552d05fbf87.ctex"
 
-[node name="Player" type="CharacterBody2D" unique_id=307889494 node_paths=PackedStringArray("Can_attack", "Death_screen", "Player_UI", "Can_level_up", "command") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=307889494 node_paths=PackedStringArray("Death_screen", "Player_UI", "Can_level_up", "command") groups=["Player"]]
 z_index = 10
 collision_layer = 3
 collision_mask = 13
 wall_min_slide_angle = 0.0
 script = ExtResource("1_btcbx")
-Can_attack = NodePath("Can attack")
 Death_screen = NodePath("UI/Death screen")
 Player_UI = NodePath("UI/Player UI")
 Can_level_up = NodePath("UI/Player UI/BoxContainer/Control/LevelUp2")
@@ -1258,7 +1262,7 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_njsjv")
 flip_h = true
 
-[node name="hoe" type="AnimatedSprite2D" parent="." unique_id=1793370639]
+[node name="hoe_icon" type="AnimatedSprite2D" parent="." unique_id=1793370639]
 visible = false
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_6xr82")
@@ -1276,14 +1280,15 @@ metadata/_custom_type_script = "uid://bhf6gsmednrk7"
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1435220923]
 shape = SubResource("CapsuleShape2D_b1ygp")
 
-[node name="hoe2" type="Node2D" parent="." unique_id=895970148 groups=["Player_projectiles"]]
+[node name="hoe" type="Node2D" parent="." unique_id=895970148 groups=["Player_projectiles"]]
 
-[node name="HitBox" type="Area2D" parent="hoe2" unique_id=1602659662]
+[node name="HitBox" type="Area2D" parent="hoe" unique_id=1602659662]
+unique_name_in_owner = true
 script = ExtResource("6_lfmf2")
 damage = 4
 metadata/_custom_type_script = "uid://o0og1idrbini"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hoe2/HitBox" unique_id=1191605606]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hoe/HitBox" unique_id=1191605606]
 position = Vector2(0, 30)
 shape = SubResource("RectangleShape2D_njsjv")
 disabled = true
@@ -1295,7 +1300,6 @@ metadata/_custom_type_script = "uid://dt2xrxrn812gc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1081034559]
 shape = SubResource("CapsuleShape2D_5htga")
-disabled = true
 
 [node name="Heling_items_detactor" type="Area2D" parent="." unique_id=1087238307 node_paths=PackedStringArray("health")]
 visible = false
@@ -1318,12 +1322,10 @@ shape = SubResource("CircleShape2D_n471f")
 unique_name_in_owner = true
 zoom = Vector2(0.5, 0.5)
 
-[node name="Wapons" type="Node2D" parent="." unique_id=2014128231]
+[node name="Weapons" type="Node2D" parent="." unique_id=2014128231]
 
-[node name="Wapon" type="Marker2D" parent="Wapons" unique_id=2057725854]
+[node name="Weapon" type="Marker2D" parent="Weapons" unique_id=2057725854]
 unique_name_in_owner = true
-
-[node name="Can attack" type="Timer" parent="." unique_id=1888641155]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=240623040]
 replication_config = SubResource("SceneReplicationConfig_apopc")
@@ -1345,16 +1347,18 @@ parameters/idel/legs/blend_position = Vector2(0, 0)
 parameters/run/legs/blend_position = Vector2(0, 0)
 parameters/run/Add/add_amount = 1.0
 parameters/run/body/blend_position = Vector2(0, 0)
-parameters/wapon/attack-transition/current_state = "swing"
-parameters/wapon/attack-transition/transition_request = ""
-parameters/wapon/attack-transition/current_index = 0
-parameters/wapon/swing-backward/blend_position = Vector2(0, 0)
-parameters/wapon/swing/blend_position = Vector2(0, 0)
+parameters/weapon/attack-transition/current_state = "swing"
+parameters/weapon/attack-transition/transition_request = ""
+parameters/weapon/attack-transition/current_index = 0
+parameters/weapon/swing-backward/blend_position = Vector2(0, 0)
+parameters/weapon/swing/blend_position = Vector2(0, 0)
 parameters/hoe/blend_position = Vector2(0, 0)
 parameters/Add/add_amount = 0.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1204922847]
 unique_name_in_owner = true
+
+[node name="Tiker" parent="UI" unique_id=1268434602 instance=ExtResource("10_pisgm")]
 
 [node name="Day night cycle" parent="UI" unique_id=1713305108 instance=ExtResource("13_p5o4e")]
 metadata/_edit_use_anchors_ = true
@@ -1394,6 +1398,44 @@ visible = false
 layout_mode = 2
 texture = ExtResource("9_00tjw")
 expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Player UI" unique_id=69455801]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82100004
+anchor_top = 0.84400004
+anchor_right = 0.82100004
+anchor_bottom = 0.84400004
+offset_left = -0.08001709
+offset_top = 0.11999512
+offset_right = 71.91998
+offset_bottom = 32.119995
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tool" parent="UI/Player UI/HBoxContainer" unique_id=1565656285 instance=ExtResource("18_o28un")]
+layout_mode = 2
+size_flags_horizontal = 3
+tool_name = "hoe"
+tool_icon = ExtResource("19_n471f")
+tool_icon_hframes = 2
+action_icon = ExtResource("20_n471f")
+action_icon_hframes = 6
+action_icon_frame = 5
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Player UI/HBoxContainer" unique_id=369859556]
+layout_mode = 2
+
+[node name="Tool2" parent="UI/Player UI/HBoxContainer" unique_id=870042118 instance=ExtResource("18_o28un")]
+layout_mode = 2
+size_flags_horizontal = 3
+tool_name = "scythe"
+tool_icon = ExtResource("19_n471f")
+tool_icon_hframes = 2
+tool_icon_frame = 1
+action_icon = ExtResource("20_n471f")
+action_icon_hframes = 6
+action_icon_frame = 4
 
 [node name="Command" parent="UI" unique_id=664677310 instance=ExtResource("14_gu6f8")]
 
@@ -1538,6 +1580,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Ping_timeout" type="Timer" parent="." unique_id=1942584867]
 unique_name_in_owner = true
@@ -1552,6 +1595,5 @@ autostart = true
 [connection signal="got_hit" from="HurtBox" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_hurt_box_got_hit"]
 [connection signal="received_HP" from="Heling_items_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/Health Bar" method="_on_heling_items_detactor_received_hp"]
 [connection signal="received_XP" from="XP_detactor" to="UI/Player UI/BoxContainer/Control/VBoxContainer/XP_bar" method="_on_xp_detactor_received_xp"]
-[connection signal="timeout" from="Can attack" to="." method="_on_can_attack_timeout"]
-[connection signal="pressed" from="UI/Death screen/BoxContainer/VBoxContainer/Retry/Retry" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="UI/Settings/PanelContainer/MarginContainer/VBoxContainer/Leave" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="UI/Death screen/BoxContainer/VBoxContainer/Retry/Retry" to="." method="_replay"]
+[connection signal="pressed" from="UI/Settings/PanelContainer/MarginContainer/VBoxContainer/Leave" to="." method="_replay"]

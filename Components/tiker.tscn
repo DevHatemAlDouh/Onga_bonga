@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdaaaqsyqxjsn"]
+
+[ext_resource type="Script" uid="uid://cjt223kb15fiw" path="res://Components/Scripts/tiker.gd" id="1_ojw21"]
+
+[node name="Tiker" type="Node" unique_id=1005764098]
+script = ExtResource("1_ojw21")

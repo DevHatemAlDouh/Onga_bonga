@@ -32,16 +32,24 @@ var player_info = {
 	}
 }
 
-var wapons = {
-	"scyth":{
+var weapons = {
+	"scythe":{
 		"base_damage" : 7
-		,"range": 250
-		,"scyths": 1
+		,"cooldown_start_at": 0
+		,"total_usage": 5
+		,"can_use": true
+	},
+	"hoe":{
+		"base_damage" : 2
+		,"cooldown": 120
+		,"cooldown_start_at": 0
+		,"can_use": true
 	}
 }
 
 var _day_time: int = 1200 
-var _nigth_time: int = 1500 
+var _night_time: int = 300 
+var _day_night_cycle: int = _day_time + _night_time
 var _time: int = 0
 var _time_progres: bool = true
 
@@ -49,17 +57,20 @@ var _time_progres: bool = true
 func tiker():
 	if _time_progres:
 		_time += 1
-		if _time == _nigth_time:
+		if _time == _day_night_cycle:
 			_time = 0
 
 func set_tiker_day():
 	_time = 0
 
-func set_tiket_nigth():
-	_time = _day_time
+func set_tiket_night():
+	_time = _day_time+1
 
 func get_tiker():
 	return _time
+
+func get_full_day_night_cycle():
+	return _day_night_cycle
 
 func set_time_progres(time_progres):
 	_time_progres = time_progres
@@ -77,15 +88,15 @@ func set_day_time(time):
 func get_day_time():
 	return _day_time
 
-func set_nigth():
+func set_night():
 	Day_night_cycle = _Cycle.Night
 
-func set_nigth_time(time):
+func set_night_time(time):
 	if time >= 0:
-		_nigth_time = time
+		_night_time = time
 
-func get_nigth_time():
-	return _nigth_time
+func get_night_time():
+	return _night_time
 
 enum _Cycle {
 	Day,
@@ -100,13 +111,3 @@ func is_it_day_yeat():
 		return true
 	else:
 		return false
-
-
-func add_xp(value):
-	pass
-	#const  XpOrb = preload("uid://dh4wshijexd47")
-	#var Xp = XpOrb.instantiate()
-	#Xp.set_xp(value)
-	#print(value, Xp)
-	#received_XP.emit(Xp.get_xp())
-	#Xp.queue_free()

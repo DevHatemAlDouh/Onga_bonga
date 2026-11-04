@@ -161,9 +161,8 @@ _data = {
 &"move": SubResource("Animation_4blql")
 }
 
-[node name="Scythe" type="Node2D" unique_id=1597304267 node_paths=PackedStringArray("hit_box") groups=["Player_projectiles"]]
+[node name="Scythe" type="Node2D" unique_id=1597304267 groups=["Player_projectiles"]]
 script = ExtResource("3_uklbn")
-hit_box = NodePath("HitBox")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1498112379]
 unique_name_in_owner = true

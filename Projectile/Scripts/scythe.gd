@@ -4,18 +4,18 @@ extends Node2D
 
 enum Status {idel, feaz_one, in_zone, feaz_two}
 var State = Status.idel
-var Target_in_range: bool = false
 var Target_one : Vector2
 var Target_two 
 @onready var nav: NavigationAgent2D = %NavigationAgent2D
 @onready var timer: Timer = %Timer
-@export var hit_box: HitBox
+@onready var hit_box: HitBox = %HitBox
 @onready var get_back: Timer = %Get_back
 
 func _ready() -> void:
 	get_back.timeout.connect(go_back)
 	timer.timeout.connect(go_back)
-	hit_box.set_damage(GameManager.wapons["scyth"]["base_damage"] + GameManager.player_info["info"]["attack_damege"])
+	GameManager.weapons["scythe"]["base_damage"] = hit_box.get_damage()
+	hit_box.set_damage(GameManager.weapons["scythe"]["base_damage"] + GameManager.player_info["info"]["attack_damege"])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 
 func Attack(playeer,targer_pos):
 	get_back.start()
-	Target_in_range = false
 	timer.stop()
 	State = Status.feaz_one
 	Target_one = targer_pos
@@ -54,5 +53,5 @@ func Move(delta: float):
 		nav.target_position = Target_two.global_position
 		translate(20 * to_local(nav.get_next_path_position()) * delta)
 		if distance_formula(self.global_position,Target_two.global_position) <= 30:
-			GameManager.wapons["scyth"]["scyths"] += 1
+			GameManager.weapons["scythe"]["total_usage"] += 1
 			queue_free()
